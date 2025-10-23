@@ -4,12 +4,15 @@ Prometheus exporter for EcoFlow devices (Smart Plugs, Power Stations, etc.) usin
 
 ## Features
 
-- Collects metrics from all EcoFlow devices in your account
-- Exports metrics in Prometheus format
-- Ready-to-use Grafana dashboard
-- Docker support with docker-compose
-- Automatic device discovery
-- Configurable collection intervals
+- 🚀 **Cloud-ready** - Deploy to Render, Railway, or Fly.io with one click
+- 🔄 **CI/CD Pipeline** - Automatic builds and deployments via GitHub Actions
+- 📊 Collects metrics from all EcoFlow devices in your account
+- 📈 Exports metrics in Prometheus format
+- 📉 Ready-to-use Grafana dashboard
+- 🐳 Docker support with docker-compose
+- 🔍 Automatic device discovery
+- ⚙️ Configurable collection intervals
+- 🔒 Secure credential management via GitHub Secrets
 
 ## Prerequisites
 
@@ -19,7 +22,23 @@ Prometheus exporter for EcoFlow devices (Smart Plugs, Power Stations, etc.) usin
 
 ## Quick Start
 
-### Using Docker Compose (Recommended)
+### Cloud Deployment (Easiest - No Installation Required!)
+
+Deploy to the cloud in minutes using GitHub Actions:
+
+1. **Fork this repository** to your GitHub account
+2. **Add GitHub Secrets** (Settings → Secrets and variables → Actions):
+   - `ECOFLOW_ACCESS_KEY` - Your EcoFlow Access Key
+   - `ECOFLOW_SECRET_KEY` - Your EcoFlow Secret Key
+3. **Choose a platform** (all have free tiers):
+   - [Render.com](https://render.com) - Click "New Blueprint" and connect your repo
+   - [Railway.app](https://railway.app) - Click "Deploy from GitHub"
+   - [Fly.io](https://fly.io) - Run `fly launch` from terminal
+4. **Done!** Your metrics are now available at your cloud URL
+
+📖 **[Full Cloud Deployment Guide →](DEPLOYMENT.md)**
+
+### Local Docker Compose
 
 1. Clone this repository:
 ```bash
