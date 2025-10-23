@@ -1,8 +1,8 @@
 const EcoFlowClient = require('./ecoflowClient');
 
 class MetricsCollector {
-    constructor(accessKey, secretKey) {
-        this.client = new EcoFlowClient(accessKey, secretKey);
+    constructor(accessKey, secretKey, apiUrl) {
+        this.client = new EcoFlowClient(accessKey, secretKey, apiUrl);
         this.devices = [];
         this.metricsCache = new Map();
     }

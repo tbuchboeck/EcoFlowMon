@@ -5,6 +5,9 @@ const config = {
     ecoflow: {
         accessKey: process.env.ECOFLOW_ACCESS_KEY || '',
         secretKey: process.env.ECOFLOW_SECRET_KEY || '',
+        // EU: https://api-e.ecoflow.com (default for developer-eu.ecoflow.com)
+        // US: https://api-a.ecoflow.com
+        apiUrl: process.env.ECOFLOW_API_URL || 'https://api-e.ecoflow.com',
     },
 
     // Metrics collection settings

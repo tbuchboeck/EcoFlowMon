@@ -32,7 +32,8 @@ class EcoFlowMon {
         // Initialize metrics collector
         this.collector = new MetricsCollector(
             config.ecoflow.accessKey,
-            config.ecoflow.secretKey
+            config.ecoflow.secretKey,
+            config.ecoflow.apiUrl
         );
 
         try {
