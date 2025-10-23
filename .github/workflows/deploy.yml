@@ -50,30 +50,30 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  deploy-render:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Trigger Render deployment
-        if: ${{ secrets.RENDER_DEPLOY_HOOK_URL != '' }}
-        run: |
-          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
-
-  deploy-railway:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Deploy to Railway
-        if: ${{ secrets.RAILWAY_TOKEN != '' }}
-        run: |
-          npm install -g @railway/cli
-          railway up --service ecoflowmon
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+  # Optional: Uncomment and configure to enable automatic deployment to Render
+  # deploy-render:
+  #   needs: build-and-push
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #
+  #   steps:
+  #     - name: Trigger Render deployment
+  #       run: |
+  #         curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
+  #
+  # Optional: Uncomment and configure to enable automatic deployment to Railway
+  # deploy-railway:
+  #   needs: build-and-push
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #
+  #     - name: Deploy to Railway
+  #       run: |
+  #         npm install -g @railway/cli
+  #         railway up --service ecoflowmon
+  #       env:
+  #         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
