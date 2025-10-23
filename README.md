@@ -24,19 +24,22 @@ Prometheus exporter for EcoFlow devices (Smart Plugs, Power Stations, etc.) usin
 
 ### Cloud Deployment (Easiest - No Installation Required!)
 
-Deploy to the cloud in minutes using GitHub Actions:
+Deploy to the cloud in minutes:
 
-1. **Fork this repository** to your GitHub account
-2. **Add GitHub Secrets** (Settings → Secrets and variables → Actions):
-   - `ECOFLOW_ACCESS_KEY` - Your EcoFlow Access Key
-   - `ECOFLOW_SECRET_KEY` - Your EcoFlow Secret Key
-3. **Choose a platform** (all have free tiers):
-   - [Render.com](https://render.com) - Click "New Blueprint" and connect your repo
-   - [Railway.app](https://railway.app) - Click "Deploy from GitHub"
-   - [Fly.io](https://fly.io) - Run `fly launch` from terminal
-4. **Done!** Your metrics are now available at your cloud URL
+1. **Add your EcoFlow credentials to GitHub Secrets**:
+   - Go to your repo → Settings → Secrets and variables → Actions
+   - Add `ECOFLOW_ACCESS_KEY` and `ECOFLOW_SECRET_KEY`
 
-📖 **[Full Cloud Deployment Guide →](DEPLOYMENT.md)**
+2. **Deploy to Render.com** (Recommended):
+   - Go to [Render Dashboard](https://dashboard.render.com)
+   - Click **New** → **Web Service** ⚠️ (Important: select "Web Service", NOT "Static Site")
+   - Connect your GitHub repo `EcoFlowMon`
+   - Add your two environment variables (same as GitHub secrets)
+   - Click **Create Web Service**
+   - Done! Access metrics at your Render URL
+
+📖 **[Step-by-Step Render Guide →](RENDER_DEPLOY.md)** (Mobile-friendly!)
+📖 **[Full Cloud Deployment Guide →](DEPLOYMENT.md)** (All platforms)
 
 ### Local Docker Compose
 
