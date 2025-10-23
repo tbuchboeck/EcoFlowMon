@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 60s
+  evaluation_interval: 60s
+
+scrape_configs:
+  - job_name: 'ecoflow'
+    static_configs:
+      - targets: ['ecoflowmon:9090']
+        labels:
+          instance: 'ecoflow-smartplugs'
