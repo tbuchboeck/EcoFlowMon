@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ecoflowmon
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: ECOFLOW_ACCESS_KEY
+        sync: false
+      - key: ECOFLOW_SECRET_KEY
+        sync: false
+      - key: COLLECTION_INTERVAL
+        value: 60
+      - key: METRICS_PORT
+        value: 9090
