@@ -15,22 +15,7 @@ services:
         value: 60
       - key: METRICS_PORT
         value: 9090
-
-  - type: web
-    name: ecoflowmon-grafana
-    env: docker
-    dockerfilePath: ./Dockerfile.grafana
-    dockerContext: .
-    plan: free
-    healthCheckPath: /api/health
-    envVars:
       - key: GF_SECURITY_ADMIN_USER
         value: admin
       - key: GF_SECURITY_ADMIN_PASSWORD
         sync: false
-      - key: GF_SERVER_ROOT_URL
-        value: https://ecoflowmon-grafana.onrender.com
-      - key: GF_AUTH_ANONYMOUS_ENABLED
-        value: false
-      - key: PROMETHEUS_URL
-        value: https://ecoflowmon.onrender.com
