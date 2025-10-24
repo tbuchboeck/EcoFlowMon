@@ -20,7 +20,7 @@
   "liveNow": false,
   "panels": [
     {
-      "datasource": "Prometheus",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -80,7 +80,7 @@
       "pluginVersion": "11.0.0",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_device_online",
           "refId": "A"
         }
@@ -89,7 +89,7 @@
       "type": "stat"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -144,13 +144,13 @@
       "pluginVersion": "11.0.0",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_bms_bmsStatus_soc",
           "legendFormat": "Battery SOC",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_pd_soc",
           "legendFormat": "System SOC",
           "refId": "B"
@@ -160,7 +160,7 @@
       "type": "gauge"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -234,13 +234,13 @@
       "pluginVersion": "11.0.0",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_pd_wattsInSum",
           "legendFormat": "Total Power In",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_pd_wattsOutSum",
           "legendFormat": "Total Power Out",
           "refId": "B"
@@ -250,7 +250,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -325,25 +325,25 @@
       "pluginVersion": "11.0.0",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_mppt_inWatts",
           "legendFormat": "MPPT Input (PV1)",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_mppt_pv2InWatts",
           "legendFormat": "MPPT Input (PV2)",
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_20_1_pv1InputWatts",
           "legendFormat": "PowerStream PV1",
           "refId": "C"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_20_1_pv2InputWatts",
           "legendFormat": "PowerStream PV2",
           "refId": "D"
@@ -353,7 +353,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -427,13 +427,13 @@
       "pluginVersion": "11.0.0",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_bms_bmsStatus_inputWatts",
           "legendFormat": "Battery Charging",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "-ecoflow_bms_bmsStatus_outputWatts",
           "legendFormat": "Battery Discharging",
           "refId": "B"
@@ -443,7 +443,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -517,19 +517,19 @@
       "pluginVersion": "11.0.0",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_inv_inputWatts",
           "legendFormat": "Inverter Input",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_inv_outputWatts",
           "legendFormat": "Inverter Output",
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_20_1_invOutputWatts",
           "legendFormat": "PowerStream Inverter Output",
           "refId": "C"
@@ -539,7 +539,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -613,7 +613,7 @@
       "pluginVersion": "11.0.0",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_2_1_watts",
           "legendFormat": "Smart Plug {{device_sn}}",
           "refId": "A"
@@ -623,7 +623,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -697,19 +697,19 @@
       "pluginVersion": "11.0.0",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_20_1_gridConsWatts",
           "legendFormat": "Grid Consumption",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_20_1_plugTotalWatts",
           "legendFormat": "Total Plug Usage",
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_20_1_batInputWatts",
           "legendFormat": "Battery Input",
           "refId": "C"
@@ -719,7 +719,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -793,25 +793,25 @@
       "pluginVersion": "11.0.0",
       "targets": [
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_20_1_batInputVolt",
           "legendFormat": "Battery Voltage",
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_20_1_pv1InputVolt",
           "legendFormat": "PV1 Voltage",
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_20_1_pv2InputVolt",
           "legendFormat": "PV2 Voltage",
           "refId": "C"
         },
         {
-          "datasource": "Prometheus",
+          "datasource": {"type": "prometheus", "uid": "prometheus"},
           "expr": "ecoflow_2_1_volt",
           "legendFormat": "Smart Plug Voltage",
           "refId": "D"
