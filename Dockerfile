@@ -6,7 +6,7 @@ RUN apk add --no-cache supervisor nginx wget
 # Install Grafana
 RUN wget https://dl.grafana.com/oss/release/grafana-11.0.0.linux-amd64.tar.gz && \
     tar -zxvf grafana-11.0.0.linux-amd64.tar.gz && \
-    mv grafana-11.0.0 /grafana && \
+    mv grafana-v11.0.0 /grafana && \
     rm grafana-11.0.0.linux-amd64.tar.gz
 
 # Create app directory
