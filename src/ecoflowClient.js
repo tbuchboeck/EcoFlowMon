@@ -78,19 +78,26 @@ class EcoFlowClient {
         const sign = this.generateSignature(uri);
 
         try {
+            // Build headers - only include Content-Type for requests with body data
+            const headers = {
+                accessKey: this.accessKey,
+                nonce,
+                timestamp,
+                sign,
+            };
+
+            // Only add Content-Type if there's request body data
+            if (data && (method.toLowerCase() === 'post' || method.toLowerCase() === 'put')) {
+                headers['Content-Type'] = 'application/json;charset=UTF-8';
+            }
+
             const response = await axios({
                 method,
                 baseURL: this.baseURL,
                 url: cleanUrl,
                 params: Object.keys(queryParams).length > 0 ? queryParams : undefined,
                 data,
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    accessKey: this.accessKey,
-                    nonce,
-                    timestamp,
-                    sign,
-                },
+                headers,
             });
 
             if (response.status === 200 && response.data.code === '0') {
