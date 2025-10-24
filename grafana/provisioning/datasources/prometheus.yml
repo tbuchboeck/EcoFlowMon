@@ -4,7 +4,7 @@ datasources:
   - name: EcoFlowMon Metrics
     type: prometheus
     access: proxy
-    url: PROMETHEUS_URL_PLACEHOLDER/metrics
+    url: PROMETHEUS_URL_PLACEHOLDER
     isDefault: true
     editable: true
     jsonData:
