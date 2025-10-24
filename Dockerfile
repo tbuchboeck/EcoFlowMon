@@ -1,6 +1,6 @@
 FROM node:20-alpine
 
-# Install supervisord, nginx, and wget for Grafana
+# Install supervisord, nginx, and wget for Grafana/Prometheus
 RUN apk add --no-cache supervisor nginx wget
 
 # Install Grafana
@@ -8,6 +8,13 @@ RUN wget https://dl.grafana.com/oss/release/grafana-11.0.0.linux-amd64.tar.gz &&
     tar -zxvf grafana-11.0.0.linux-amd64.tar.gz && \
     mv grafana-v11.0.0 /grafana && \
     rm grafana-11.0.0.linux-amd64.tar.gz
+
+# Install Prometheus
+RUN wget https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz && \
+    tar -zxvf prometheus-2.45.0.linux-amd64.tar.gz && \
+    mv prometheus-2.45.0.linux-amd64 /prometheus && \
+    rm prometheus-2.45.0.linux-amd64.tar.gz && \
+    mkdir -p /prometheus/data
 
 # Create app directory
 WORKDIR /app
@@ -23,6 +30,9 @@ COPY src ./src
 
 # Copy Grafana provisioning
 COPY grafana/provisioning /grafana/conf/provisioning
+
+# Copy Prometheus config
+COPY prometheus.yml /prometheus/prometheus.yml
 
 # Create supervisord config
 COPY supervisord.conf /etc/supervisord.conf

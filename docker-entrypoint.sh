@@ -20,11 +20,17 @@ export GF_PATHS_LOGS=/grafana/logs
 export GF_PATHS_PLUGINS=/grafana/plugins
 export GF_PATHS_PROVISIONING=/grafana/conf/provisioning
 
-# Update datasource to use localhost (both services in same container)
-sed -i 's|PROMETHEUS_URL_PLACEHOLDER|http://localhost:9090|g' /grafana/conf/provisioning/datasources/prometheus.yml
+# Update datasource to point to Prometheus
+sed -i 's|PROMETHEUS_URL_PLACEHOLDER|http://localhost:9091|g' /grafana/conf/provisioning/datasources/prometheus.yml
 
 echo "Configuration complete. Starting services..."
-echo "Nginx reverse proxy will be available on port 8080"
+echo "Services starting in order:"
+echo "  1. EcoFlowMon (metrics collector) on port 9090"
+echo "  2. Prometheus (time-series database) on port 9091"
+echo "  3. Grafana (dashboard) on port 3000"
+echo "  4. Nginx (reverse proxy) on port 8080"
+echo ""
+echo "Public endpoints via Nginx:"
 echo "  - / -> Grafana dashboard"
 echo "  - /metrics -> EcoFlowMon metrics"
 echo "  - /health -> Health check"
