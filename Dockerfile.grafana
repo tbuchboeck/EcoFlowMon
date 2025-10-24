@@ -1,0 +1,15 @@
+FROM grafana/grafana:latest
+
+# Copy provisioning configuration
+COPY grafana/provisioning /etc/grafana/provisioning
+
+# Copy entrypoint script to substitute environment variables
+COPY grafana-entrypoint.sh /grafana-entrypoint.sh
+RUN chmod +x /grafana-entrypoint.sh
+
+# Set Grafana admin password (will be overridden by env var)
+ENV GF_SECURITY_ADMIN_PASSWORD=admin
+ENV GF_INSTALL_PLUGINS=""
+
+# Use custom entrypoint to process datasource template
+ENTRYPOINT ["/grafana-entrypoint.sh"]
