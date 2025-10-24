@@ -13,10 +13,11 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "datasource": "Prometheus",
@@ -56,7 +57,7 @@
         }
       },
       "gridPos": {
-        "h": 4,
+        "h": 8,
         "w": 6,
         "x": 0,
         "y": 0
@@ -74,11 +75,12 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "value_and_name"
       },
-      "pluginVersion": "9.0.0",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
+          "datasource": "Prometheus",
           "expr": "ecoflow_device_online",
           "refId": "A"
         }
@@ -91,14 +93,87 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 20
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "green",
+                "value": 60
+              }
+            ]
+          },
+          "unit": "percent"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_bms_bmsStatus_soc",
+          "legendFormat": "Battery SOC",
+          "refId": "A"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_pd_soc",
+          "legendFormat": "System SOC",
+          "refId": "B"
+        }
+      ],
+      "title": "Battery State of Charge",
+      "type": "gauge"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
               "tooltip": false,
@@ -106,12 +181,102 @@
               "legend": false
             },
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "watt"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_pd_wattsInSum",
+          "legendFormat": "Total Power In",
+          "refId": "A"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_pd_wattsOutSum",
+          "legendFormat": "Total Power Out",
+          "refId": "B"
+        }
+      ],
+      "title": "Total Power Flow",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "none",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -138,27 +303,53 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 4
+        "y": 8
       },
-      "id": 2,
+      "id": 4,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
+          "calcs": [
+            "last",
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "multi",
+          "sort": "none"
         }
       },
+      "pluginVersion": "11.0.0",
       "targets": [
         {
-          "expr": "ecoflow_watts",
-          "legendFormat": "Power (W)",
+          "datasource": "Prometheus",
+          "expr": "ecoflow_mppt_inWatts",
+          "legendFormat": "MPPT Input (PV1)",
           "refId": "A"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_mppt_pv2InWatts",
+          "legendFormat": "MPPT Input (PV2)",
+          "refId": "B"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_20_1_pv1InputWatts",
+          "legendFormat": "PowerStream PV1",
+          "refId": "C"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_20_1_pv2InputWatts",
+          "legendFormat": "PowerStream PV2",
+          "refId": "D"
         }
       ],
-      "title": "Power Consumption",
+      "title": "Solar Power Input",
       "type": "timeseries"
     },
     {
@@ -169,11 +360,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisCenteredZero": true,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
               "tooltip": false,
@@ -181,12 +374,12 @@
               "legend": false
             },
             "lineInterpolation": "linear",
-            "lineWidth": 1,
+            "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -206,42 +399,432 @@
               }
             ]
           },
-          "unit": "watth"
+          "unit": "watt"
         }
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 4
+        "y": 8
       },
-      "id": 3,
+      "id": 5,
       "options": {
         "legend": {
           "calcs": [
-            "last"
+            "last",
+            "mean"
           ],
-          "displayMode": "list",
-          "placement": "bottom"
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "multi",
+          "sort": "none"
         }
       },
+      "pluginVersion": "11.0.0",
       "targets": [
         {
-          "expr": "ecoflow_watth",
-          "legendFormat": "Energy (Wh)",
+          "datasource": "Prometheus",
+          "expr": "ecoflow_bms_bmsStatus_inputWatts",
+          "legendFormat": "Battery Charging",
+          "refId": "A"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "-ecoflow_bms_bmsStatus_outputWatts",
+          "legendFormat": "Battery Discharging",
+          "refId": "B"
+        }
+      ],
+      "title": "Battery Power (Charge/Discharge)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "none",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "watt"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_inv_inputWatts",
+          "legendFormat": "Inverter Input",
+          "refId": "A"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_inv_outputWatts",
+          "legendFormat": "Inverter Output",
+          "refId": "B"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_20_1_invOutputWatts",
+          "legendFormat": "PowerStream Inverter Output",
+          "refId": "C"
+        }
+      ],
+      "title": "Inverter Power",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "watt"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_2_1_watts",
+          "legendFormat": "Smart Plug {{device_sn}}",
           "refId": "A"
         }
       ],
-      "title": "Energy Usage",
+      "title": "Smart Plug Power Consumption",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "none",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "watt"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_20_1_gridConsWatts",
+          "legendFormat": "Grid Consumption",
+          "refId": "A"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_20_1_plugTotalWatts",
+          "legendFormat": "Total Plug Usage",
+          "refId": "B"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_20_1_batInputWatts",
+          "legendFormat": "Battery Input",
+          "refId": "C"
+        }
+      ],
+      "title": "PowerStream Metrics",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "none",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "volt"
+        }
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_20_1_batInputVolt",
+          "legendFormat": "Battery Voltage",
+          "refId": "A"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_20_1_pv1InputVolt",
+          "legendFormat": "PV1 Voltage",
+          "refId": "B"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_20_1_pv2InputVolt",
+          "legendFormat": "PV2 Voltage",
+          "refId": "C"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "ecoflow_2_1_volt",
+          "legendFormat": "Smart Plug Voltage",
+          "refId": "D"
+        }
+      ],
+      "title": "System Voltages",
       "type": "timeseries"
     }
   ],
-  "schemaVersion": 36,
+  "refresh": "30s",
+  "schemaVersion": 38,
   "style": "dark",
-  "tags": ["ecoflow"],
+  "tags": ["ecoflow", "solar", "battery", "monitoring"],
   "templating": {
     "list": []
   },
@@ -251,7 +834,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "EcoFlow Smart Plug Monitoring",
-  "uid": "ecoflow-smartplug",
-  "version": 1
+  "title": "EcoFlow Monitoring Dashboard",
+  "uid": "ecoflow-main",
+  "version": 1,
+  "weekStart": ""
 }
