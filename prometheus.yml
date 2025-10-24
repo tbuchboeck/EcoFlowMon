@@ -3,8 +3,21 @@ global:
   evaluation_interval: 60s
 
 scrape_configs:
-  - job_name: 'ecoflow'
+  # Scrape from cloud deployment (Render)
+  - job_name: 'ecoflow-cloud'
+    scheme: https
+    static_configs:
+      - targets: ['ecoflowmon.onrender.com']
+        labels:
+          instance: 'ecoflow-cloud'
+          location: 'render'
+    scrape_interval: 60s
+    scrape_timeout: 30s
+
+  # Scrape from local deployment (if running docker-compose locally)
+  - job_name: 'ecoflow-local'
     static_configs:
       - targets: ['ecoflowmon:9090']
         labels:
-          instance: 'ecoflow-smartplugs'
+          instance: 'ecoflow-local'
+          location: 'docker'
