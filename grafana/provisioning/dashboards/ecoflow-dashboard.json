@@ -256,7 +256,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_pd_wattsInSum",
+          "expr": "(ecoflow_pd_wattsInSum)/10",
           "legendFormat": "Total Power In",
           "refId": "A"
         },
@@ -265,7 +265,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_pd_wattsOutSum",
+          "expr": "(ecoflow_pd_wattsOutSum)/10",
           "legendFormat": "Total Power Out",
           "refId": "B"
         }
@@ -356,7 +356,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_mppt_inWatts",
+          "expr": "(ecoflow_mppt_inWatts)/10",
           "legendFormat": "MPPT Input (PV1)",
           "refId": "A"
         },
@@ -365,7 +365,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_mppt_pv2InWatts",
+          "expr": "(ecoflow_mppt_pv2InWatts)/10",
           "legendFormat": "MPPT Input (PV2)",
           "refId": "B"
         },
@@ -374,7 +374,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_20_1_pv1InputWatts",
+          "expr": "(ecoflow_20_1_pv1InputWatts)/10",
           "legendFormat": "PowerStream PV1",
           "refId": "C"
         },
@@ -383,7 +383,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_20_1_pv2InputWatts",
+          "expr": "(ecoflow_20_1_pv2InputWatts)/10",
           "legendFormat": "PowerStream PV2",
           "refId": "D"
         }
@@ -473,7 +473,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_bms_bmsStatus_inputWatts",
+          "expr": "(ecoflow_bms_bmsStatus_inputWatts)/10",
           "legendFormat": "Battery Charging",
           "refId": "A"
         },
@@ -482,7 +482,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "-ecoflow_bms_bmsStatus_outputWatts",
+          "expr": "-(ecoflow_bms_bmsStatus_outputWatts)/10",
           "legendFormat": "Battery Discharging",
           "refId": "B"
         }
@@ -572,7 +572,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_inv_inputWatts",
+          "expr": "(ecoflow_inv_inputWatts)/10",
           "legendFormat": "Inverter Input",
           "refId": "A"
         },
@@ -581,7 +581,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_inv_outputWatts",
+          "expr": "(ecoflow_inv_outputWatts)/10",
           "legendFormat": "Inverter Output",
           "refId": "B"
         },
@@ -590,7 +590,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_20_1_invOutputWatts",
+          "expr": "(ecoflow_20_1_invOutputWatts)/10",
           "legendFormat": "PowerStream Inverter Output",
           "refId": "C"
         }
@@ -680,7 +680,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=\"HW52ZDH59G892017\"}",
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G892017\"})/10",
           "legendFormat": "Fridge",
           "refId": "A"
         },
@@ -689,7 +689,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=\"HW52ZDH59G855542\"}",
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G855542\"})/10",
           "legendFormat": "Dryer",
           "refId": "B"
         },
@@ -698,7 +698,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=\"HW52ZDH59G892037\"}",
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G892037\"})/10",
           "legendFormat": "Router & Charging Station",
           "refId": "C"
         },
@@ -707,7 +707,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=\"HW52ZDH59G892149\"}",
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G892149\"})/10",
           "legendFormat": "Dishwasher",
           "refId": "D"
         },
@@ -716,7 +716,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=\"HW52ZDH59G892165\"}",
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G892165\"})/10",
           "legendFormat": "Microwave",
           "refId": "E"
         },
@@ -725,7 +725,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=\"HW52ZDH59G894218\"}",
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G894218\"})/10",
           "legendFormat": "Washing Machine",
           "refId": "F"
         },
@@ -734,7 +734,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=\"HW52ZDH59G894302\"}",
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G894302\"})/10",
           "legendFormat": "TV Station",
           "refId": "G"
         },
@@ -743,7 +743,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=\"HW52ZDH59G894556\"}",
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G894556\"})/10",
           "legendFormat": "Coffee Machine",
           "refId": "H"
         },
@@ -752,7 +752,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=\"HW52ZDH59G894798\"}",
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G894798\"})/10",
           "legendFormat": "Workstation",
           "refId": "I"
         }
@@ -842,7 +842,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_20_1_gridConsWatts",
+          "expr": "(ecoflow_20_1_gridConsWatts)/10",
           "legendFormat": "Grid Consumption",
           "refId": "A"
         },
@@ -851,7 +851,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_20_1_plugTotalWatts",
+          "expr": "(ecoflow_20_1_plugTotalWatts)/10",
           "legendFormat": "Total Plug Usage",
           "refId": "B"
         },
@@ -860,7 +860,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_20_1_batInputWatts",
+          "expr": "(ecoflow_20_1_batInputWatts)/10",
           "legendFormat": "Battery Input",
           "refId": "C"
         }
