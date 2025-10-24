@@ -1,9 +1,12 @@
 apiVersion: 1
 
 datasources:
-  - name: Prometheus
+  - name: EcoFlowMon Metrics
     type: prometheus
     access: proxy
-    url: http://prometheus:9090
+    url: PROMETHEUS_URL_PLACEHOLDER/metrics
     isDefault: true
     editable: true
+    jsonData:
+      timeInterval: "60s"
+      httpMethod: GET
