@@ -45,12 +45,33 @@ class EcoFlowClient {
         const nonce = String(100000 + Math.floor(Math.random() * 100000));
         const timestamp = String(Date.now());
 
-        // Generate data string (sorted by keys)
-        let dataStr = '';
+        // Extract query parameters from URL
+        let queryParams = {};
+        let cleanUrl = url;
+        if (url.includes('?')) {
+            const [path, query] = url.split('?');
+            cleanUrl = path;
+            // Parse query string into params object
+            query.split('&').forEach(param => {
+                const [key, value] = param.split('=');
+                if (key && value) {
+                    queryParams[key] = value;
+                }
+            });
+        }
+
+        // Combine query params and body data for signature
+        let allParams = { ...queryParams };
         if (data) {
             const flatData = this.flattenKeys(data);
-            const flatDataKeys = Object.keys(flatData).sort();
-            dataStr = flatDataKeys.map(k => `${k}=${flatData[k]}`).join('&') + '&';
+            allParams = { ...allParams, ...flatData };
+        }
+
+        // Generate data string (sorted by keys)
+        let dataStr = '';
+        if (Object.keys(allParams).length > 0) {
+            const sortedKeys = Object.keys(allParams).sort();
+            dataStr = sortedKeys.map(k => `${k}=${allParams[k]}`).join('&') + '&';
         }
 
         const uri = `${dataStr}accessKey=${this.accessKey}&nonce=${nonce}&timestamp=${timestamp}`;
@@ -60,7 +81,8 @@ class EcoFlowClient {
             const response = await axios({
                 method,
                 baseURL: this.baseURL,
-                url,
+                url: cleanUrl,
+                params: Object.keys(queryParams).length > 0 ? queryParams : undefined,
                 data,
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
