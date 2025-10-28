@@ -662,7 +662,8 @@
         "legend": {
           "calcs": [
             "last",
-            "mean"
+            "mean",
+            "sum"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -773,6 +774,15 @@
           "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G852886\"})/10",
           "legendFormat": "Deco Wozi",
           "refId": "K"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(ecoflow_2_1_watts)/10",
+          "legendFormat": "Total (All Plugs)",
+          "refId": "Z"
         }
       ],
       "title": "Smart Plug Power Consumption",
