@@ -764,6 +764,15 @@
           "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G890652\"})/10",
           "legendFormat": "Gaming Station",
           "refId": "J"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G852886\"})/10",
+          "legendFormat": "Deco Wozi",
+          "refId": "K"
         }
       ],
       "title": "Smart Plug Power Consumption",
