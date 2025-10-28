@@ -755,6 +755,15 @@
           "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G894798\"})/10",
           "legendFormat": "Workstation",
           "refId": "I"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "(ecoflow_2_1_watts{device_sn=\"HW52ZDH59G890652\"})/10",
+          "legendFormat": "Gaming Station",
+          "refId": "J"
         }
       ],
       "title": "Smart Plug Power Consumption",
