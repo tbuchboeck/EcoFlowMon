@@ -58,8 +58,8 @@ services:
     environment:
       - ECOFLOW_ACCESS_KEY=${ECOFLOW_ACCESS_KEY}
       - ECOFLOW_SECRET_KEY=${ECOFLOW_SECRET_KEY}
-      - PROMETHEUS_URL=http://prometheus:9090
-      - COLLECTION_INTERVAL=60000
+      - METRICS_PORT=9090
+      - COLLECTION_INTERVAL=60
       - LOG_LEVEL=info
     depends_on:
       - prometheus
