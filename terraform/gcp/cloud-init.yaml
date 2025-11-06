@@ -1,0 +1,68 @@
+#cloud-config
+
+# Install Docker and Docker Compose
+packages:
+  - docker.io
+  - docker-compose
+  - git
+
+runcmd:
+  # Enable Docker service
+  - systemctl enable docker
+  - systemctl start docker
+
+  # Create app directory
+  - mkdir -p /opt/ecoflowmon
+  - cd /opt/ecoflowmon
+
+  # Clone repository (will be updated via GitHub Actions later)
+  - git clone https://github.com/tbuchboeck/EcoFlowMon.git .
+
+  # Create .env file from metadata
+  - |
+    cat > /opt/ecoflowmon/.env <<EOF
+    ECOFLOW_ACCESS_KEY=$(curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/ecoflow_access_key)
+    ECOFLOW_SECRET_KEY=$(curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/ecoflow_secret_key)
+    GF_SECURITY_ADMIN_PASSWORD=$(curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/attributes/grafana_password)
+    EOF
+
+  # Create persistent data directory for Prometheus
+  - mkdir -p /opt/ecoflowmon/prometheus-data
+  - chmod 777 /opt/ecoflowmon/prometheus-data
+
+  # Start services with Docker Compose
+  - cd /opt/ecoflowmon
+  - docker-compose -f docker-compose.gcp.yml up -d
+
+  # Setup auto-update on reboot
+  - |
+    cat > /etc/systemd/system/ecoflowmon.service <<EOF
+    [Unit]
+    Description=EcoFlowMon Services
+    After=docker.service
+    Requires=docker.service
+
+    [Service]
+    Type=oneshot
+    RemainAfterExit=yes
+    WorkingDirectory=/opt/ecoflowmon
+    ExecStartPre=/usr/bin/git pull origin main
+    ExecStart=/usr/bin/docker-compose -f docker-compose.gcp.yml up -d
+    ExecStop=/usr/bin/docker-compose -f docker-compose.gcp.yml down
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+
+  - systemctl daemon-reload
+  - systemctl enable ecoflowmon.service
+
+write_files:
+  - path: /opt/ecoflowmon/update.sh
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      cd /opt/ecoflowmon
+      git pull origin main
+      docker-compose -f docker-compose.gcp.yml pull
+      docker-compose -f docker-compose.gcp.yml up -d --force-recreate

@@ -1,0 +1,47 @@
+name: Deploy to GCP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  GCP_ZONE: us-east1-b
+  INSTANCE_NAME: ecoflowmon
+
+jobs:
+  deploy:
+    name: Deploy to GCP VM
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Deploy to VM
+        run: |
+          gcloud compute ssh ${{ env.INSTANCE_NAME }} \
+            --zone=${{ env.GCP_ZONE }} \
+            --command="cd /opt/ecoflowmon && sudo git pull origin main && sudo docker-compose -f docker-compose.gcp.yml pull && sudo docker-compose -f docker-compose.gcp.yml up -d --force-recreate"
+
+      - name: Verify deployment
+        run: |
+          echo "Checking service health..."
+          gcloud compute ssh ${{ env.INSTANCE_NAME }} \
+            --zone=${{ env.GCP_ZONE }} \
+            --command="docker ps"
+
+          echo "Deployment successful! 🚀"
+          VM_IP=$(gcloud compute instances describe ${{ env.INSTANCE_NAME }} --zone=${{ env.GCP_ZONE }} --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+          echo "Grafana URL: http://$VM_IP:3000"
