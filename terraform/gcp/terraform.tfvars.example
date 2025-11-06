@@ -1,0 +1,13 @@
+# GCP Project Configuration
+project_id = "your-gcp-project-id"
+
+# Region and Zone (us-east1 for lowest latency to Europe within Always Free tier)
+region = "us-east1"
+zone   = "us-east1-b"
+
+# EcoFlow API Credentials
+ecoflow_access_key = "your-ecoflow-access-key"
+ecoflow_secret_key = "your-ecoflow-secret-key"
+
+# Grafana Configuration
+grafana_password = "your-secure-grafana-password"
