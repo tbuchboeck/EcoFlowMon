@@ -39,7 +39,7 @@ resource "google_compute_instance" "ecoflowmon" {
 
   metadata = {
     google-logging-enabled = "true"
-    user-data              = file("${path.module}/cloud-init.yaml")
+    startup-script         = file("${path.module}/startup-script.sh")
     ecoflow_access_key     = var.ecoflow_access_key
     ecoflow_secret_key     = var.ecoflow_secret_key
     grafana_password       = var.grafana_password
