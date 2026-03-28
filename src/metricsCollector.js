@@ -91,6 +91,7 @@ class MetricsCollector {
      */
     parseQuotas(device, quotas) {
         const metrics = [];
+        const isOffline = !device.online;
         const labels = {
             device_name: device.productName,
             device_sn: device.sn,
@@ -111,9 +112,15 @@ class MetricsCollector {
 
                     if (numericValue !== null) {
                         const scaledValue = this.scaleMetricValue(metricName, numericValue);
+                        // Zero out power/voltage metrics for offline devices
+                        // to avoid showing stale cached values
+                        const lower = metricName.toLowerCase();
+                        const isPowerMetric = lower.includes('watts') || lower.includes('watth') ||
+                            lower.includes('volt') || lower.includes('current');
+                        const finalValue = (isOffline && isPowerMetric) ? 0 : scaledValue;
                         metrics.push({
                             name: `ecoflow_${metricName}`,
-                            value: scaledValue,
+                            value: finalValue,
                             labels,
                             help: `EcoFlow ${metricName} for ${device.productName}`
                         });

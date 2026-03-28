@@ -794,6 +794,30 @@
                 "value": "Deco Wozi"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G893825.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 1 (disconnected)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G895552.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 2 (disconnected)"
+              }
+            ]
           }
         ]
       },
@@ -1853,6 +1877,30 @@
               {
                 "id": "displayName",
                 "value": "Deco Wozi"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G893825.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 1 (disconnected)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G895552.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 2 (disconnected)"
               }
             ]
           }
