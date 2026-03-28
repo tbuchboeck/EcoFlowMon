@@ -40,6 +40,22 @@ class MetricsCollector {
     }
 
     /**
+     * Scale metric value based on metric name.
+     * The EcoFlow API returns power metrics in deciWatts (tenths of watts)
+     * and voltages in deciVolts, so we divide by 10 at the source.
+     */
+    scaleMetricValue(metricName, value) {
+        const lower = metricName.toLowerCase();
+        if (lower.includes('watts') || lower.includes('watth')) {
+            return value / 10;
+        }
+        if (lower.includes('volt')) {
+            return value / 10;
+        }
+        return value;
+    }
+
+    /**
      * Collect metrics from all devices
      */
     async collectMetrics() {
@@ -94,9 +110,10 @@ class MetricsCollector {
                     const numericValue = this.extractNumericValue(value);
 
                     if (numericValue !== null) {
+                        const scaledValue = this.scaleMetricValue(metricName, numericValue);
                         metrics.push({
                             name: `ecoflow_${metricName}`,
-                            value: numericValue,
+                            value: scaledValue,
                             labels,
                             help: `EcoFlow ${metricName} for ${device.productName}`
                         });
