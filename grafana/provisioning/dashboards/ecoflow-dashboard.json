@@ -661,7 +661,141 @@
             ]
           },
           "unit": "watt"
-        }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892017.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G855542.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dryer"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892037.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Router & Charging Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892149.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dishwasher"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892165.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Microwave"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894218.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Washing Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894302.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TV Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894556.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Coffee Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894798.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Workstation"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G890652.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gaming Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G852886.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Deco Wozi"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -694,7 +828,7 @@
             "uid": "prometheus"
           },
           "expr": "ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}",
-          "legendFormat": "{{device_name}}",
+          "legendFormat": "{{device_sn}}",
           "refId": "A"
         },
         {
@@ -1588,7 +1722,141 @@
             ]
           },
           "unit": "watt"
-        }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892017.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G855542.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dryer"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892037.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Router & Charging Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892149.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dishwasher"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892165.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Microwave"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894218.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Washing Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894302.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TV Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894556.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Coffee Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894798.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Workstation"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G890652.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gaming Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G852886.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Deco Wozi"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -1620,7 +1888,7 @@
             "uid": "prometheus"
           },
           "expr": "topk(10, ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"})",
-          "legendFormat": "{{device_name}}",
+          "legendFormat": "{{device_sn}}",
           "refId": "A"
         }
       ],
