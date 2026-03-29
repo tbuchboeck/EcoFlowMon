@@ -148,7 +148,9 @@
           },
           "expr": "sum(increase(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) / 1000",
           "legendFormat": "Smart Plugs Total",
-          "refId": "A"
+          "refId": "A",
+          "instant": true,
+          "range": false
         }
       ],
       "title": "Daily Smart Plug Consumption",
@@ -208,7 +210,9 @@
           },
           "expr": "sum(increase(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) / 1000 * $electricity_price",
           "legendFormat": "Estimated Daily Cost",
-          "refId": "A"
+          "refId": "A",
+          "instant": true,
+          "range": false
         }
       ],
       "title": "Estimated Daily Cost",
@@ -426,7 +430,9 @@
           },
           "expr": "topk(10, ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"})",
           "legendFormat": "{{device_sn}}",
-          "refId": "A"
+          "refId": "A",
+          "instant": true,
+          "range": false
         }
       ],
       "title": "Smart Plug Energy Ranking",
@@ -644,7 +650,7 @@
         ]
       },
       "gridPos": {
-        "h": 12,
+        "h": 24,
         "w": 24,
         "x": 0,
         "y": 8
@@ -653,7 +659,7 @@
       "options": {
         "legend": {
           "calcs": [
-            "last",
+            "lastNotNull",
             "mean",
             "sum"
           ],
