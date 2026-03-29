@@ -455,7 +455,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 80,
+            "fillOpacity": 30,
             "gradientMode": "none",
             "hideFrom": {
               "tooltip": false,
@@ -665,7 +665,7 @@
               },
               {
                 "id": "custom.lineWidth",
-                "value": 2
+                "value": 4
               },
               {
                 "id": "custom.lineStyle",
