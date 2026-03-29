@@ -396,6 +396,7 @@ def scrape_and_update(client: NetzOOEClient) -> bool:
         if profile_values:
             valid_daily_values: list[float] = []
             monthly_sums: dict[str, float] = {}
+            monthly_day_counts: dict[str, int] = {}
             # De-duplicate by local date (overlapping chunks may repeat a day)
             seen_dates: set[str] = set()
 
@@ -425,9 +426,17 @@ def scrape_and_update(client: NetzOOEClient) -> bool:
                 # Aggregate into monthly totals
                 month_key = local_date_str[:7]  # YYYY-MM
                 monthly_sums[month_key] = monthly_sums.get(month_key, 0) + value
+                monthly_day_counts[month_key] = monthly_day_counts.get(month_key, 0) + 1
 
             for month_key, total in monthly_sums.items():
-                SMARTMETER_MONTHLY_KWH.labels(month=month_key).set(total)
+                days_in_month = monthly_day_counts.get(month_key, 0)
+                if days_in_month >= 15:
+                    SMARTMETER_MONTHLY_KWH.labels(month=month_key).set(total)
+                else:
+                    logger.info(
+                        "Skipping month %s: only %d days of data (need 15+)",
+                        month_key, days_in_month,
+                    )
 
             # -- Rolling 30-day daily average --
             if valid_daily_values:
