@@ -727,6 +727,1204 @@
       ],
       "title": "Smart Plug Power Consumption",
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 100,
+      "panels": [],
+      "title": "Cost & Energy Projections",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "orange",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "currencyEUR"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 33
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 24 / 1000 * $electricity_price",
+          "legendFormat": "Daily",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 168 / 1000 * $electricity_price",
+          "legendFormat": "Weekly",
+          "refId": "B",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 720 / 1000 * $electricity_price",
+          "legendFormat": "Monthly",
+          "refId": "C",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 8760 / 1000 * $electricity_price",
+          "legendFormat": "Yearly",
+          "refId": "D",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Estimated Costs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 10
+              },
+              {
+                "color": "orange",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 200
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 33
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 24 / 1000",
+          "legendFormat": "Daily",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 168 / 1000",
+          "legendFormat": "Weekly",
+          "refId": "B",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 720 / 1000",
+          "legendFormat": "Monthly",
+          "refId": "C",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 8760 / 1000",
+          "legendFormat": "Yearly",
+          "refId": "D",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Estimated Energy Consumption",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892017.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G855542.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dryer"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892037.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Router & Charging Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892149.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dishwasher"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892165.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Microwave"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894218.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Washing Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894302.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TV Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894556.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Coffee Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894798.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Workstation"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G890652.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gaming Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G852886.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Deco Wozi"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G893825.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 1 (disconnected)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G895552.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 2 (disconnected)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*Total.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Total (All Plugs)"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 33
+      },
+      "id": 8,
+      "options": {
+        "displayMode": "horizontal",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "max_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])",
+          "legendFormat": "{{device_sn}}",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "max_over_time(sum(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"})[24h:1m])",
+          "legendFormat": "Total (All Plugs)",
+          "refId": "B",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Peak Power (24h)",
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 101,
+      "panels": [],
+      "title": "Device Health",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "mode": "none",
+              "group": "A"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 35
+              },
+              {
+                "color": "red",
+                "value": 45
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892017.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G855542.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dryer"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892037.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Router & Charging Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892149.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dishwasher"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892165.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Microwave"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894218.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Washing Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894302.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TV Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894556.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Coffee Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894798.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Workstation"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G890652.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gaming Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G852886.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Deco Wozi"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G893825.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 1 (disconnected)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G895552.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 2 (disconnected)"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 42
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "ecoflow_2_1_temp{device_sn=~\"$smartplug_sn\"}",
+          "legendFormat": "{{device_sn}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Plug Temperature",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": -70
+              },
+              {
+                "color": "yellow",
+                "value": -60
+              },
+              {
+                "color": "green",
+                "value": -50
+              }
+            ]
+          },
+          "unit": "dBm"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892017.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G855542.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dryer"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892037.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Router & Charging Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892149.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dishwasher"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892165.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Microwave"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894218.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Washing Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894302.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TV Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894556.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Coffee Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894798.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Workstation"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G890652.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gaming Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G852886.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Deco Wozi"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G893825.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 1 (disconnected)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G895552.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 2 (disconnected)"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 42
+      },
+      "id": 10,
+      "options": {
+        "displayMode": "horizontal",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "ecoflow_2_1_parentWifiRssi{device_sn=~\"$smartplug_sn\"}",
+          "legendFormat": "{{device_sn}}",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "WiFi Signal Strength",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "d"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892017.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G855542.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dryer"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892037.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Router & Charging Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892149.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dishwasher"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892165.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Microwave"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894218.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Washing Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894302.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TV Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894556.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Coffee Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894798.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Workstation"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G890652.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gaming Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G852886.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Deco Wozi"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G893825.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 1 (disconnected)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G895552.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Speaker 2 (disconnected)"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 42
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "ecoflow_2_1_runTime{device_sn=~\"$smartplug_sn\"} / 60 / 24",
+          "legendFormat": "{{device_sn}}",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Device Uptime",
+      "type": "stat"
     }
   ],
   "refresh": "30s",
