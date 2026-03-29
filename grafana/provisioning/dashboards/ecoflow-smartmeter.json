@@ -306,11 +306,8 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [],
+          "unit": "kwatth",
+          "decimals": 2,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -323,38 +320,151 @@
                 "value": 6
               },
               {
+                "color": "orange",
+                "value": 8
+              },
+              {
                 "color": "red",
                 "value": 10
               }
             ]
           },
-          "unit": "kwatth"
+          "custom": {
+            "cellOptions": {
+              "type": "color-background",
+              "mode": "gradient"
+            },
+            "align": "center"
+          }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 150
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "auto"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "string"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Field"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "__name__"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "instance"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "job"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "Last.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "kWh"
+              },
+              {
+                "id": "custom.width",
+                "value": 100
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background",
+                  "mode": "gradient"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "kwatth"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 12,
+        "h": 14,
         "w": 24,
         "x": 0,
         "y": 8
       },
       "id": 5,
       "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "bottom",
-        "orientation": "vertical",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
+        "showHeader": true,
+        "cellHeight": "sm",
+        "footer": {
+          "show": true,
+          "reducer": [
+            "sum",
+            "mean"
           ],
-          "fields": "",
-          "values": false
+          "countRows": false
         },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
+        "sortBy": [
+          {
+            "displayName": "date",
+            "desc": true
+          }
+        ]
       },
       "pluginVersion": "11.0.0",
       "targets": [
@@ -363,15 +473,38 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "label_replace(smartmeter_daily_kwh, \"day\", \"$1\", \"date\", \"\\\\d{4}-\\\\d{2}-(.*)\")",
-          "legendFormat": "{{day}}",
+          "expr": "sort(smartmeter_daily_kwh)",
+          "legendFormat": "{{date}}",
           "refId": "A",
           "instant": true,
           "range": false
         }
       ],
       "title": "Daily Consumption (kWh)",
-      "type": "bargauge"
+      "type": "table",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "lastNotNull"
+            ],
+            "labelsToFields": true
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "date",
+                "desc": true
+              }
+            ]
+          }
+        }
+      ]
     },
     {
       "collapsed": false,
