@@ -1889,10 +1889,10 @@
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 6,
-        "x": 18,
-        "y": 42
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 50
       },
       "id": 11,
       "options": {
@@ -1907,7 +1907,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "value_and_name"
+        "textMode": "value_and_name",
+        "displayMode": "gradient",
+        "showUnfilled": true,
+        "sizing": "auto",
+        "minVizHeight": 20
       },
       "pluginVersion": "11.0.0",
       "targets": [
@@ -1924,7 +1928,7 @@
         }
       ],
       "title": "Device Uptime",
-      "type": "stat"
+      "type": "bargauge"
     }
   ],
   "refresh": "30s",

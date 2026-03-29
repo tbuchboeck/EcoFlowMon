@@ -709,6 +709,17 @@
           "refId": "A",
           "instant": true,
           "range": false
+        },
+        {
+          "expr": "smartmeter_yearly_trend_kwh",
+          "legendFormat": "2025/26 (so far)",
+          "refId": "B",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          }
         }
       ],
       "title": "Yearly Consumption History",
@@ -775,6 +786,17 @@
           "refId": "A",
           "instant": true,
           "range": false
+        },
+        {
+          "expr": "smartmeter_yearly_trend_kwh * $electricity_price",
+          "legendFormat": "2025/26 (so far)",
+          "refId": "B",
+          "instant": true,
+          "range": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          }
         }
       ],
       "title": "Yearly Cost History",
