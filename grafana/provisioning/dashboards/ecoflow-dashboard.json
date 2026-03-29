@@ -146,7 +146,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(increase(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) / 1000",
+          "expr": "sum(increase(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) / 1000",
           "legendFormat": "Smart Plugs Total",
           "refId": "A",
           "instant": true,
@@ -208,7 +208,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(increase(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) / 1000 * $electricity_price",
+          "expr": "sum(increase(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) / 1000 * $electricity_price",
           "legendFormat": "Estimated Daily Cost",
           "refId": "A",
           "instant": true,
@@ -372,30 +372,6 @@
                 "value": "Deco Wozi"
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G893825.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 1 (disconnected)"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G895552.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 2 (disconnected)"
-              }
-            ]
           }
         ]
       },
@@ -428,7 +404,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "topk(10, ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"})",
+          "expr": "topk(10, ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"})",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": true,
@@ -626,30 +602,6 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": ".*HW52ZDH59G893825.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 1 (disconnected)"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G895552.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 2 (disconnected)"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
               "options": ".*Total.*"
             },
             "properties": [
@@ -711,7 +663,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}",
+          "expr": "ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}",
           "legendFormat": "{{device_sn}}",
           "refId": "A"
         },
@@ -720,7 +672,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"})",
+          "expr": "sum(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"})",
           "legendFormat": "Total (All Plugs)",
           "refId": "Z"
         }
@@ -806,7 +758,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 24 / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000 * $electricity_price",
           "legendFormat": "Daily",
           "refId": "A",
           "instant": true,
@@ -817,7 +769,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 168 / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 168 / 1000 * $electricity_price",
           "legendFormat": "Weekly",
           "refId": "B",
           "instant": true,
@@ -828,7 +780,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 720 / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 720 / 1000 * $electricity_price",
           "legendFormat": "Monthly",
           "refId": "C",
           "instant": true,
@@ -839,7 +791,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 8760 / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 8760 / 1000 * $electricity_price",
           "legendFormat": "Yearly",
           "refId": "D",
           "instant": true,
@@ -914,7 +866,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 24 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000",
           "legendFormat": "Daily",
           "refId": "A",
           "instant": true,
@@ -925,7 +877,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 168 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 168 / 1000",
           "legendFormat": "Weekly",
           "refId": "B",
           "instant": true,
@@ -936,7 +888,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 720 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 720 / 1000",
           "legendFormat": "Monthly",
           "refId": "C",
           "instant": true,
@@ -947,7 +899,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])) * 8760 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 8760 / 1000",
           "legendFormat": "Yearly",
           "refId": "D",
           "instant": true,
@@ -1115,30 +1067,6 @@
           {
             "matcher": {
               "id": "byRegexp",
-              "options": ".*HW52ZDH59G893825.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 1 (disconnected)"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G895552.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 2 (disconnected)"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
               "options": ".*Total.*"
             },
             "properties": [
@@ -1179,7 +1107,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "max_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"}[24h])",
+          "expr": "max_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": true,
@@ -1190,7 +1118,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "max_over_time(sum(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\"})[24h:1m])",
+          "expr": "max_over_time(sum(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"})[24h:1m])",
           "legendFormat": "Total (All Plugs)",
           "refId": "B",
           "instant": true,
@@ -1405,30 +1333,6 @@
                 "value": "Deco Wozi"
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G893825.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 1 (disconnected)"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G895552.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 2 (disconnected)"
-              }
-            ]
           }
         ]
       },
@@ -1462,7 +1366,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_temp{device_sn=~\"$smartplug_sn\"}",
+          "expr": "ecoflow_2_1_temp{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}",
           "legendFormat": "{{device_sn}}",
           "refId": "A"
         }
@@ -1636,30 +1540,6 @@
                 "value": "Deco Wozi"
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G893825.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 1 (disconnected)"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G895552.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 2 (disconnected)"
-              }
-            ]
           }
         ]
       },
@@ -1692,7 +1572,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_parentWifiRssi{device_sn=~\"$smartplug_sn\"}",
+          "expr": "ecoflow_2_1_parentWifiRssi{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": true,
@@ -1861,30 +1741,6 @@
                 "value": "Deco Wozi"
               }
             ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G893825.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 1 (disconnected)"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": ".*HW52ZDH59G895552.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Speaker 2 (disconnected)"
-              }
-            ]
           }
         ]
       },
@@ -1920,7 +1776,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_runTime{device_sn=~\"$smartplug_sn\"} / 60 / 24",
+          "expr": "ecoflow_2_1_runTime{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"} / 60 / 24",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": true,
