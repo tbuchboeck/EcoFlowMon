@@ -443,7 +443,7 @@
       },
       "gridPos": {
         "h": 14,
-        "w": 24,
+        "w": 12,
         "x": 0,
         "y": 8
       },
@@ -507,6 +507,87 @@
       ]
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 14,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color",
+        "text": {
+          "valueSize": 14
+        }
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "smartmeter_monthly_kwh",
+          "legendFormat": "{{month}}",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "label_replace(smartmeter_monthly_trend_kwh, \"month\", \"2026-03 (current)\", \"\", \"\")",
+          "legendFormat": "{{month}}",
+          "refId": "B",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Monthly Consumption Trend",
+      "type": "bargauge"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
@@ -539,7 +620,8 @@
               }
             ]
           },
-          "unit": "kwatth"
+          "unit": "kwatth",
+          "min": 0
         },
         "overrides": [
           {
@@ -802,7 +884,8 @@
               }
             ]
           },
-          "unit": "kwatth"
+          "unit": "kwatth",
+          "min": 0
         },
         "overrides": []
       },
@@ -879,7 +962,8 @@
               }
             ]
           },
-          "unit": "currencyEUR"
+          "unit": "currencyEUR",
+          "min": 0
         },
         "overrides": []
       },

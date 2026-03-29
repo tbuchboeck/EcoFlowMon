@@ -238,7 +238,8 @@
               }
             ]
           },
-          "unit": "watt"
+          "unit": "watt",
+          "min": 0
         },
         "overrides": [
           {
@@ -929,7 +930,8 @@
               }
             ]
           },
-          "unit": "watt"
+          "unit": "watt",
+          "min": 0
         },
         "overrides": [
           {
@@ -1406,7 +1408,9 @@
               }
             ]
           },
-          "unit": "dBm"
+          "unit": "dBm",
+          "min": -100,
+          "max": 0
         },
         "overrides": [
           {
@@ -1607,7 +1611,8 @@
               }
             ]
           },
-          "unit": "d"
+          "unit": "d",
+          "min": 0
         },
         "overrides": [
           {
