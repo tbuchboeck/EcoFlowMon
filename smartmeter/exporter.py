@@ -83,9 +83,29 @@ SMARTMETER_MONTHLY_TREND_PER_DAY = Gauge(
     "smartmeter_monthly_trend_per_day_kwh",
     "Current month per-day consumption from monthly trend in kWh",
 )
+SMARTMETER_MONTHLY_TREND_PREV_KWH = Gauge(
+    "smartmeter_monthly_trend_prev_kwh",
+    "Previous month consumption sum from monthly trend in kWh",
+)
+SMARTMETER_MONTHLY_TREND_CHANGE_PCT = Gauge(
+    "smartmeter_monthly_trend_change_pct",
+    "Month-over-month consumption change in percent",
+)
+SMARTMETER_MONTHLY_TREND_CHANGE_PER_DAY = Gauge(
+    "smartmeter_monthly_trend_change_per_day_kwh",
+    "Month-over-month change in kWh per day",
+)
 SMARTMETER_YEARLY_TREND_KWH = Gauge(
     "smartmeter_yearly_trend_kwh",
     "Current year consumption sum from yearly trend in kWh",
+)
+SMARTMETER_YEARLY_TREND_PREV_KWH = Gauge(
+    "smartmeter_yearly_trend_prev_kwh",
+    "Previous year consumption sum from yearly trend in kWh",
+)
+SMARTMETER_YEARLY_TREND_CHANGE_PCT = Gauge(
+    "smartmeter_yearly_trend_change_pct",
+    "Year-over-year consumption change in percent",
 )
 SMARTMETER_SCRAPE_SUCCESS = Gauge(
     "smartmeter_scrape_success",
@@ -359,19 +379,45 @@ def scrape_and_update(client: NetzOOEClient) -> bool:
     mt = pod.get("monthlyTrend")
     if mt:
         current = mt.get("consumptionNew", {})
-        SMARTMETER_MONTHLY_TREND_KWH.set(current.get("sum", 0))
-        SMARTMETER_MONTHLY_TREND_PER_DAY.set(current.get("perDay", 0))
-        logger.info(
-            "Monthly trend: %.1f kWh total, %.2f kWh/day",
-            current.get("sum", 0),
-            current.get("perDay", 0),
-        )
+        previous = mt.get("consumptionOld", {})
+        cur_sum = current.get("sum", 0)
+        cur_per_day = current.get("perDay", 0)
+        prev_sum = previous.get("sum", 0)
+        prev_per_day = previous.get("perDay", 0)
+
+        SMARTMETER_MONTHLY_TREND_KWH.set(cur_sum)
+        SMARTMETER_MONTHLY_TREND_PER_DAY.set(cur_per_day)
+        SMARTMETER_MONTHLY_TREND_PREV_KWH.set(prev_sum)
+
+        if prev_per_day > 0:
+            change_pct = ((cur_per_day - prev_per_day) / prev_per_day) * 100
+            SMARTMETER_MONTHLY_TREND_CHANGE_PCT.set(round(change_pct, 2))
+            SMARTMETER_MONTHLY_TREND_CHANGE_PER_DAY.set(round(cur_per_day - prev_per_day, 3))
+            logger.info(
+                "Monthly trend: %.1f kWh (prev %.1f kWh), %+.1f%% change, %+.2f kWh/day",
+                cur_sum, prev_sum, change_pct, cur_per_day - prev_per_day,
+            )
+        else:
+            logger.info("Monthly trend: %.1f kWh total, %.2f kWh/day", cur_sum, cur_per_day)
 
     # -- Yearly trend --
     yt = pod.get("yearlyTrend")
     if yt:
         current_yearly = yt.get("consumptionNew", {})
-        SMARTMETER_YEARLY_TREND_KWH.set(current_yearly.get("sum", 0))
+        previous_yearly = yt.get("consumptionOld", {})
+        cur_yr_sum = current_yearly.get("sum", 0)
+        prev_yr_sum = previous_yearly.get("sum", 0)
+
+        SMARTMETER_YEARLY_TREND_KWH.set(cur_yr_sum)
+        SMARTMETER_YEARLY_TREND_PREV_KWH.set(prev_yr_sum)
+
+        if prev_yr_sum > 0:
+            yr_change_pct = ((cur_yr_sum - prev_yr_sum) / prev_yr_sum) * 100
+            SMARTMETER_YEARLY_TREND_CHANGE_PCT.set(round(yr_change_pct, 2))
+            logger.info(
+                "Yearly trend: %.1f kWh (prev %.1f kWh), %+.1f%%",
+                cur_yr_sum, prev_yr_sum, yr_change_pct,
+            )
 
     # -- Billing period consumptions -> monthly/yearly aggregates --
     consumptions = contract.get("consumptions", {})
