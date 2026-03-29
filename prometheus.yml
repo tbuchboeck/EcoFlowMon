@@ -8,3 +8,10 @@ scrape_configs:
       - targets: ['ecoflow-collector:9090']
         labels:
           instance: 'ecoflowmon'
+
+  - job_name: 'smartmeter'
+    static_configs:
+      - targets: ['smartmeter-exporter:9091']
+        labels:
+          instance: 'smartmeter'
+    scrape_interval: 300s

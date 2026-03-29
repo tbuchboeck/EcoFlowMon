@@ -71,6 +71,27 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  smartmeter-exporter:
+    build:
+      context: ./smartmeter
+      dockerfile: Dockerfile
+    container_name: smartmeter-exporter
+    restart: unless-stopped
+    environment:
+      - NETZOOE_USERNAME=${NETZOOE_USERNAME}
+      - NETZOOE_PASSWORD=${NETZOOE_PASSWORD}
+      - METRICS_PORT=9091
+      - SCRAPE_INTERVAL=21600
+      - DAILY_PROFILE_DAYS=30
+      - LOG_LEVEL=INFO
+    networks:
+      - monitoring
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
 networks:
   monitoring:
     driver: bridge
