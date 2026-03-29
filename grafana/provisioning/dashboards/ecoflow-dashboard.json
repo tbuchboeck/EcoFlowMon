@@ -455,7 +455,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 10,
+            "fillOpacity": 80,
             "gradientMode": "none",
             "hideFrom": {
               "tooltip": false,
@@ -471,8 +471,8 @@
             "showPoints": "never",
             "spanNulls": false,
             "stacking": {
-              "group": "A",
-              "mode": "none"
+              "mode": "normal",
+              "group": "A"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -644,6 +644,38 @@
               {
                 "id": "displayName",
                 "value": "Speaker 2 (disconnected)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*Total.*"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "mode": "none"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 2
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "fill": "dash",
+                  "dash": [
+                    10,
+                    5
+                  ]
+                }
               }
             ]
           }
