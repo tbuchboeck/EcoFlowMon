@@ -1,0 +1,706 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "id": 100,
+      "title": "Current Status",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "blue" },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "blue", "value": null }]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 6, "w": 6, "x": 0, "y": 1 },
+      "id": 1,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_total_kwh",
+          "legendFormat": "",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Meter Reading",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "green" },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 6, "w": 6, "x": 6, "y": 1 },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_daily_avg_kwh",
+          "legendFormat": "",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Daily Average (30d)",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "orange" },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "orange", "value": null }]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 6, "w": 6, "x": 12, "y": 1 },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_monthly_trend_kwh",
+          "legendFormat": "",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "This Month",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "purple" },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "purple", "value": null }]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 6, "w": 6, "x": 18, "y": 1 },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_yearly_trend_kwh",
+          "legendFormat": "",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Last 12 Months",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 7 },
+      "id": 101,
+      "title": "Daily Consumption",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 6 },
+              { "color": "red", "value": 10 }
+            ]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 8 },
+      "id": 5,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_daily_kwh",
+          "legendFormat": "{{date}}",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Daily Consumption (kWh)",
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 18 },
+      "id": 102,
+      "title": "Smart Plug Coverage",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Total Household (meter)" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "blue" } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Smart Plugs (EcoFlow)" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "orange" } }
+            ]
+          }
+        ]
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 19 },
+      "id": 6,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_daily_avg_kwh",
+          "legendFormat": "Total Household (meter)",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts[24h])) * 24 / 1000",
+          "legendFormat": "Smart Plugs (EcoFlow)",
+          "refId": "B",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Smart Plug vs Total (daily avg kWh)",
+      "type": "bargauge"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 20 },
+              { "color": "green", "value": 40 },
+              { "color": "blue", "value": 60 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 19 },
+      "id": 7,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts[24h])) * 24 / 1000 / smartmeter_daily_avg_kwh * 100",
+          "legendFormat": "",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Smart Plug Coverage",
+      "type": "gauge"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "description": "Lighting, heating, oven, etc.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "semi-dark-red" },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "semi-dark-red", "value": null }]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 19 },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_daily_avg_kwh - sum(avg_over_time(ecoflow_2_1_watts[24h])) * 24 / 1000",
+          "legendFormat": "",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Unmonitored (daily avg)",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 27 },
+      "id": 103,
+      "title": "Historical Comparison",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "kwatth"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 28 },
+      "id": 9,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_yearly_kwh",
+          "legendFormat": "{{year}}",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Yearly Consumption History",
+      "type": "bargauge"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "green", "value": null }]
+          },
+          "unit": "currencyEUR"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 28 },
+      "id": 10,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_yearly_kwh * $electricity_price",
+          "legendFormat": "{{year}}",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Yearly Cost History",
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 36 },
+      "id": 104,
+      "title": "Cost Projection",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "orange" },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "orange", "value": null }]
+          },
+          "unit": "currencyEUR"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 6, "w": 8, "x": 0, "y": 37 },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_monthly_trend_kwh * $electricity_price",
+          "legendFormat": "",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "This Month's Cost (so far)",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "purple" },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [{ "color": "purple", "value": null }]
+          },
+          "unit": "currencyEUR"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 6, "w": 8, "x": 8, "y": 37 },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "smartmeter_yearly_trend_kwh * $electricity_price",
+          "legendFormat": "",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Yearly Cost (12 months)",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 7200 },
+              { "color": "red", "value": 86400 }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 6, "w": 8, "x": 16, "y": 37 },
+      "id": 13,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "expr": "time() - smartmeter_last_scrape_timestamp",
+          "legendFormat": "",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "title": "Data Age",
+      "type": "stat"
+    }
+  ],
+  "refresh": "5m",
+  "schemaVersion": 38,
+  "tags": ["smartmeter", "electricity", "netzooe"],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "0.35",
+          "value": "0.35"
+        },
+        "hide": 0,
+        "label": "Electricity Price (EUR/kWh)",
+        "name": "electricity_price",
+        "options": [
+          {
+            "selected": true,
+            "text": "0.35",
+            "value": "0.35"
+          }
+        ],
+        "query": "0.35",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Household Electricity (Smart Meter)",
+  "uid": "smartmeter",
+  "version": 1,
+  "weekStart": ""
+}
