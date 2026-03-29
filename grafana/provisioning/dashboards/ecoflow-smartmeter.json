@@ -306,8 +306,12 @@
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "kwatth",
+          "color": {
+            "mode": "thresholds"
+          },
           "decimals": 2,
+          "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -329,142 +333,33 @@
               }
             ]
           },
-          "custom": {
-            "cellOptions": {
-              "type": "color-background",
-              "mode": "gradient"
-            },
-            "align": "center"
-          }
+          "unit": "kwatth"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "date"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 150
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "auto"
-                }
-              },
-              {
-                "id": "unit",
-                "value": "string"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Field"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "__name__"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "instance"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "job"
-            },
-            "properties": [
-              {
-                "id": "custom.hidden",
-                "value": true
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byRegexp",
-              "options": "Last.*"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "kWh"
-              },
-              {
-                "id": "custom.width",
-                "value": 100
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-background",
-                  "mode": "gradient"
-                }
-              },
-              {
-                "id": "unit",
-                "value": "kwatth"
-              },
-              {
-                "id": "decimals",
-                "value": 2
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
-        "h": 14,
-        "w": 12,
+        "h": 16,
+        "w": 24,
         "x": 0,
         "y": 8
       },
       "id": 5,
       "options": {
-        "showHeader": true,
-        "cellHeight": "sm",
-        "footer": {
-          "show": true,
-          "reducer": [
-            "sum",
-            "mean"
+        "displayMode": "gradient",
+        "minVizHeight": 15,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
           ],
-          "countRows": false
+          "fields": "",
+          "values": false
         },
-        "sortBy": [
-          {
-            "displayName": "date",
-            "desc": true
-          }
-        ]
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
       },
       "pluginVersion": "11.0.0",
       "targets": [
@@ -473,7 +368,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sort(smartmeter_daily_kwh)",
+          "expr": "sort_desc(smartmeter_daily_kwh)",
           "legendFormat": "{{date}}",
           "refId": "A",
           "instant": true,
@@ -481,30 +376,7 @@
         }
       ],
       "title": "Daily Consumption (kWh)",
-      "type": "table",
-      "transformations": [
-        {
-          "id": "reduce",
-          "options": {
-            "reducers": [
-              "lastNotNull"
-            ],
-            "labelsToFields": true
-          }
-        },
-        {
-          "id": "sortBy",
-          "options": {
-            "fields": {},
-            "sort": [
-              {
-                "field": "date",
-                "desc": true
-              }
-            ]
-          }
-        }
-      ]
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -534,9 +406,9 @@
       },
       "gridPos": {
         "h": 14,
-        "w": 12,
-        "x": 12,
-        "y": 8
+        "w": 24,
+        "x": 0,
+        "y": 24
       },
       "id": 14,
       "options": {
@@ -571,17 +443,6 @@
           "refId": "A",
           "instant": true,
           "range": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "label_replace(smartmeter_monthly_trend_kwh, \"month\", \"2026-03 (current)\", \"\", \"\")",
-          "legendFormat": "{{month}}",
-          "refId": "B",
-          "instant": true,
-          "range": false
         }
       ],
       "title": "Monthly Consumption Trend",
@@ -593,7 +454,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 38
       },
       "id": 102,
       "title": "Smart Plug Coverage",
@@ -660,7 +521,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 19
+        "y": 39
       },
       "id": 6,
       "options": {
@@ -698,7 +559,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts[24h])) * 24 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000",
           "legendFormat": "Smart Plugs (EcoFlow)",
           "refId": "B",
           "instant": true,
@@ -751,7 +612,7 @@
         "h": 8,
         "w": 6,
         "x": 12,
-        "y": 19
+        "y": 39
       },
       "id": 7,
       "options": {
@@ -776,7 +637,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts[24h])) * 24 / 1000 / smartmeter_daily_avg_kwh * 100",
+          "expr": "scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000) / scalar(smartmeter_daily_avg_kwh) * 100",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -817,7 +678,7 @@
         "h": 8,
         "w": 6,
         "x": 18,
-        "y": 19
+        "y": 39
       },
       "id": 8,
       "options": {
@@ -841,7 +702,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "smartmeter_daily_avg_kwh - sum(avg_over_time(ecoflow_2_1_watts[24h])) * 24 / 1000",
+          "expr": "scalar(smartmeter_daily_avg_kwh) - scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000)",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -857,7 +718,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 47
       },
       "id": 103,
       "title": "Historical Comparison",
@@ -893,7 +754,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 28
+        "y": 48
       },
       "id": 9,
       "options": {
@@ -971,7 +832,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 28
+        "y": 48
       },
       "id": 10,
       "options": {
@@ -1025,7 +886,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 56
       },
       "id": 104,
       "title": "Cost Projection",
@@ -1061,7 +922,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 37
+        "y": 57
       },
       "id": 11,
       "options": {
@@ -1125,7 +986,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 37
+        "y": 57
       },
       "id": 12,
       "options": {
@@ -1196,7 +1057,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 37
+        "y": 57
       },
       "id": 13,
       "options": {
