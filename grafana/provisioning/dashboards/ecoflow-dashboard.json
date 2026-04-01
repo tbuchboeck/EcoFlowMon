@@ -245,7 +245,7 @@
         "h": 8,
         "w": 6,
         "x": 0,
-        "y": 0
+        "y": 12
       },
       "id": 1,
       "options": {
@@ -306,7 +306,7 @@
         "h": 8,
         "w": 6,
         "x": 6,
-        "y": 0
+        "y": 12
       },
       "id": 4,
       "options": {
@@ -369,7 +369,7 @@
         "h": 8,
         "w": 6,
         "x": 12,
-        "y": 0
+        "y": 12
       },
       "id": 5,
       "options": {
@@ -566,7 +566,7 @@
         "h": 8,
         "w": 6,
         "x": 18,
-        "y": 0
+        "y": 12
       },
       "id": 3,
       "options": {
@@ -827,7 +827,7 @@
         "h": 24,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 20
       },
       "id": 2,
       "options": {
@@ -877,7 +877,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 44
       },
       "id": 100,
       "panels": [],
@@ -925,7 +925,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 33
+        "y": 45
       },
       "id": 6,
       "options": {
@@ -1034,7 +1034,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 33
+        "y": 45
       },
       "id": 7,
       "options": {
@@ -1276,7 +1276,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 33
+        "y": 45
       },
       "id": 8,
       "options": {
@@ -1331,7 +1331,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 53
       },
       "id": 101,
       "panels": [],
@@ -1537,7 +1537,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 42
+        "y": 54
       },
       "id": 9,
       "options": {
@@ -1747,7 +1747,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 42
+        "y": 54
       },
       "id": 10,
       "options": {
@@ -1952,7 +1952,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 62
       },
       "id": 11,
       "options": {
@@ -1997,10 +1997,10 @@
       "title": "Energy Share by Device",
       "description": "Shows how total energy consumption is distributed across your smart plugs over the selected time range. The bigger the slice, the more energy that device uses relative to others.",
       "gridPos": {
-        "h": 10,
+        "h": 12,
         "w": 12,
         "x": 0,
-        "y": 60
+        "y": 0
       },
       "datasource": {
         "type": "prometheus",
@@ -2224,10 +2224,10 @@
       "title": "Top 5 Consumers Over Time",
       "description": "Shows the 5 highest-consuming smart plugs over time. Useful for spotting which devices drive your electricity bill and when they're most active.",
       "gridPos": {
-        "h": 10,
+        "h": 12,
         "w": 12,
         "x": 12,
-        "y": 60
+        "y": 0
       },
       "datasource": {
         "type": "prometheus",
