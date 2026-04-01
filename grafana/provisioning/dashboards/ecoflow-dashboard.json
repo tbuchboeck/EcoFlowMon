@@ -146,7 +146,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(increase(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000",
           "legendFormat": "Smart Plugs Total",
           "refId": "A",
           "instant": true,
@@ -208,7 +208,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(increase(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000 * $electricity_price",
           "legendFormat": "Estimated Daily Cost",
           "refId": "A",
           "instant": true,

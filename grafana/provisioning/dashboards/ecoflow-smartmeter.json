@@ -380,14 +380,26 @@
       "type": "bargauge"
     },
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 105,
+      "title": "Trends",
+      "type": "row"
+    },
+    {
       "id": 14,
       "type": "stat",
       "title": "30-Day Trend",
       "gridPos": {
         "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 24
+        "w": 8,
+        "x": 0,
+        "y": 25
       },
       "datasource": {
         "type": "prometheus",
@@ -451,7 +463,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 31
       },
       "id": 102,
       "title": "Smart Plug Coverage",
@@ -518,7 +530,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 39
+        "y": 32
       },
       "id": 6,
       "options": {
@@ -556,7 +568,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000",
           "legendFormat": "Smart Plugs (EcoFlow)",
           "refId": "B",
           "instant": true,
@@ -609,7 +621,7 @@
         "h": 8,
         "w": 6,
         "x": 12,
-        "y": 39
+        "y": 32
       },
       "id": 7,
       "options": {
@@ -634,7 +646,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000) / scalar(smartmeter_daily_avg_kwh) * 100",
+          "expr": "clamp_max(clamp_min(scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000) / scalar(smartmeter_daily_avg_kwh) * 100, 0), 100)",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -675,7 +687,7 @@
         "h": 8,
         "w": 6,
         "x": 18,
-        "y": 39
+        "y": 32
       },
       "id": 8,
       "options": {
@@ -699,7 +711,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "scalar(smartmeter_daily_avg_kwh) - scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000)",
+          "expr": "clamp_min(scalar(smartmeter_daily_avg_kwh) - scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000), 0)",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -715,7 +727,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 40
       },
       "id": 103,
       "title": "Historical Comparison",
@@ -751,7 +763,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 48
+        "y": 41
       },
       "id": 9,
       "options": {
@@ -829,7 +841,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 48
+        "y": 41
       },
       "id": 10,
       "options": {
@@ -883,7 +895,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 56
+        "y": 49
       },
       "id": 104,
       "title": "Cost Projection",
@@ -919,7 +931,7 @@
         "h": 6,
         "w": 8,
         "x": 0,
-        "y": 57
+        "y": 50
       },
       "id": 11,
       "options": {
@@ -983,7 +995,7 @@
         "h": 6,
         "w": 8,
         "x": 8,
-        "y": 57
+        "y": 50
       },
       "id": 12,
       "options": {
@@ -1054,7 +1066,7 @@
         "h": 6,
         "w": 8,
         "x": 16,
-        "y": 57
+        "y": 50
       },
       "id": 13,
       "options": {
@@ -1094,9 +1106,9 @@
       "title": "Month Comparison (kWh)",
       "gridPos": {
         "h": 6,
-        "w": 6,
-        "x": 20,
-        "y": 57
+        "w": 8,
+        "x": 8,
+        "y": 25
       },
       "datasource": {
         "type": "prometheus",
@@ -1160,6 +1172,72 @@
         "showUnfilled": true,
         "sizing": "auto",
         "minVizHeight": 20
+      }
+    },
+    {
+      "id": 16,
+      "type": "stat",
+      "title": "Yearly Trend",
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 25
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "smartmeter_yearly_trend_change_pct",
+          "legendFormat": "vs previous year",
+          "refId": "A",
+          "instant": true,
+          "range": false
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 5
+              },
+              {
+                "color": "orange",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "options": {
+        "graphMode": "none",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name",
+        "colorMode": "background"
       }
     }
   ],
