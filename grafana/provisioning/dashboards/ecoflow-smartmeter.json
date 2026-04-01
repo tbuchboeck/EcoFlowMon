@@ -93,7 +93,8 @@
         }
       ],
       "title": "Meter Reading",
-      "type": "stat"
+      "type": "stat",
+      "description": "Total electricity consumed since your meter was installed. This is the actual reading from your Netz O\u00d6 smart meter (Z\u00e4hler 3450163)."
     },
     {
       "datasource": {
@@ -157,7 +158,8 @@
         }
       ],
       "title": "Daily Average (30d)",
-      "type": "stat"
+      "type": "stat",
+      "description": "Average daily consumption over the last 30 days from your smart meter. A typical Austrian household uses 7-10 kWh/day."
     },
     {
       "datasource": {
@@ -286,7 +288,8 @@
         }
       ],
       "title": "Last 12 Months",
-      "type": "stat"
+      "type": "stat",
+      "description": "Rolling 12-month consumption from the Netz O\u00d6 yearly trend. This is your actual annual usage from the grid meter."
     },
     {
       "collapsed": false,
@@ -377,7 +380,8 @@
         }
       ],
       "title": "Daily Consumption (kWh)",
-      "type": "bargauge"
+      "type": "bargauge",
+      "description": "Daily consumption for each day in the last 30 days. Green = low usage (<6 kWh), yellow = normal (6-8), orange = above average (8-10), red = high (>10 kWh). Sorted highest first."
     },
     {
       "collapsed": false,
@@ -578,7 +582,8 @@
         }
       ],
       "title": "Smart Plug vs Total (daily avg kWh)",
-      "type": "bargauge"
+      "type": "bargauge",
+      "description": "Side-by-side comparison: total household daily average (from smart meter) vs smart plug daily average (from EcoFlow, 7-day window). The difference is unmonitored consumption."
     },
     {
       "datasource": {
@@ -656,7 +661,8 @@
         }
       ],
       "title": "Smart Plug Coverage",
-      "type": "gauge"
+      "type": "gauge",
+      "description": "What percentage of your total household electricity is tracked by the 11 EcoFlow smart plugs. Uses a 7-day average for stability. ~50-60% is typical since plugs don't cover lights, oven, or heating."
     },
     {
       "datasource": {
@@ -812,7 +818,8 @@
         }
       ],
       "title": "Yearly Consumption History",
-      "type": "bargauge"
+      "type": "bargauge",
+      "description": "Annual consumption from each billing period (Jul-Jun). Data from Netz O\u00d6 billing records going back to 2020."
     },
     {
       "datasource": {
@@ -890,7 +897,8 @@
         }
       ],
       "title": "Yearly Cost History",
-      "type": "bargauge"
+      "type": "bargauge",
+      "description": "Annual cost estimate per billing period. Multiply the kWh from Panel 9 by your electricity price."
     },
     {
       "collapsed": false,
@@ -1103,7 +1111,8 @@
         }
       ],
       "title": "Data Age",
-      "type": "stat"
+      "type": "stat",
+      "description": "How long ago the smart meter data was last refreshed from the Netz O\u00d6 portal. Green = fresh (<2h). Yellow = getting stale (2-24h). Red = data may be outdated (>24h). The exporter runs every 6 hours."
     },
     {
       "id": 15,

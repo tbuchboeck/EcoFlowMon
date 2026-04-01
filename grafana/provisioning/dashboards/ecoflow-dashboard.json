@@ -275,7 +275,8 @@
         }
       ],
       "title": "Device Status",
-      "type": "stat"
+      "type": "stat",
+      "description": "Shows all 15 registered EcoFlow devices. Green = online and reporting data. Red = offline or disconnected. Includes smart plugs, PowerStream, and DELTA 2 Max."
     },
     {
       "datasource": {
@@ -337,7 +338,8 @@
         }
       ],
       "title": "Daily Smart Plug Consumption",
-      "type": "stat"
+      "type": "stat",
+      "description": "Estimated daily energy based on the average power draw over the last 24 hours. Formula: average watts \u00d7 24h \u00f7 1000 = kWh."
     },
     {
       "datasource": {
@@ -399,7 +401,8 @@
         }
       ],
       "title": "Estimated Daily Cost",
-      "type": "stat"
+      "type": "stat",
+      "description": "Estimated daily cost based on 24h average power draw \u00d7 electricity price. Only covers the 11 monitored smart plugs (~53% of total household)."
     },
     {
       "datasource": {
@@ -598,7 +601,8 @@
         }
       ],
       "title": "Smart Plug Energy Ranking",
-      "type": "bargauge"
+      "type": "bargauge",
+      "description": "Current power draw per plug, sorted highest first. This is the instantaneous value right now \u2014 not an average."
     },
     {
       "datasource": {
@@ -864,7 +868,8 @@
         }
       ],
       "title": "Smart Plug Power Consumption",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Real-time power draw from all 11 smart plugs, stacked to show each plug's contribution. The dashed line shows the total. Hover over the chart to see individual values at any point in time."
     },
     {
       "collapsed": false,
@@ -1317,7 +1322,8 @@
         }
       ],
       "title": "Peak Power (24h)",
-      "type": "bargauge"
+      "type": "bargauge",
+      "description": "Highest power draw recorded in the last 24 hours per plug. Useful for spotting which appliances have the biggest spikes (e.g., dishwasher heating cycle, washing machine spin)."
     },
     {
       "collapsed": false,
@@ -1563,7 +1569,8 @@
         }
       ],
       "title": "Plug Temperature",
-      "type": "timeseries"
+      "type": "timeseries",
+      "description": "Internal temperature of each smart plug. Normal range is 20-40\u00b0C. Yellow zone (35\u00b0C+) means the plug is warm. Red zone (45\u00b0C+) could indicate overload."
     },
     {
       "datasource": {
@@ -1775,7 +1782,8 @@
         }
       ],
       "title": "WiFi Signal Strength",
-      "type": "bargauge"
+      "type": "bargauge",
+      "description": "WiFi signal strength (RSSI) for each plug. Green (> -50 dBm) = strong. Yellow (-50 to -60) = fair. Orange (-60 to -70) = weak. Red (< -70 dBm) = poor, may cause data gaps."
     },
     {
       "datasource": {
@@ -1980,7 +1988,8 @@
         }
       ],
       "title": "Device Uptime",
-      "type": "bargauge"
+      "type": "bargauge",
+      "description": "How long each plug has been running since its last reset, in days. A low number means the plug recently restarted (power outage, firmware update, or manual reset)."
     }
   ],
   "refresh": "30s",
