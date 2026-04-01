@@ -801,8 +801,9 @@
           "range": false
         }
       ],
-      "title": "Estimated Costs",
-      "type": "stat"
+      "title": "Smart Plug Cost Projection",
+      "type": "stat",
+      "description": "Estimated cost for the 11 monitored smart plugs only (~53% of total household). Based on the last 24h average power draw, extrapolated forward. Does NOT include unmonitored devices (lights, oven, heating, etc.)."
     },
     {
       "datasource": {
@@ -909,8 +910,9 @@
           "range": false
         }
       ],
-      "title": "Estimated Energy Consumption",
-      "type": "stat"
+      "title": "Smart Plug Energy Projection",
+      "type": "stat",
+      "description": "Estimated energy for the 11 monitored smart plugs only. Based on the last 24h average. For total household numbers, see the Household Electricity dashboard."
     },
     {
       "datasource": {

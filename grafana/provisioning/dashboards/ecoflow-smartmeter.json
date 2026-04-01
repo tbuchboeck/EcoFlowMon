@@ -427,19 +427,20 @@
               },
               {
                 "color": "yellow",
-                "value": 5
+                "value": 3
               },
               {
                 "color": "orange",
-                "value": 10
+                "value": 8
               },
               {
                 "color": "red",
-                "value": 20
+                "value": 15
               }
             ]
           },
-          "mappings": []
+          "mappings": [],
+          "custom": {}
         },
         "overrides": []
       },
@@ -455,7 +456,8 @@
         },
         "textMode": "value_and_name",
         "colorMode": "background"
-      }
+      },
+      "description": "Compares your average daily consumption over the last 30 days vs the previous 30 days.\n\n**Green** = using less than before (saving energy)\n**Yellow** = 5-10% more than before\n**Orange** = 10-20% more\n**Red** = 20%+ more\n\nA positive value means you're consuming MORE electricity than the previous period."
     },
     {
       "collapsed": false,
@@ -646,7 +648,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "clamp_max(clamp_min(scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000) / scalar(smartmeter_daily_avg_kwh) * 100, 0), 100)",
+          "expr": "scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000) / scalar(smartmeter_daily_avg_kwh) * 100",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -679,7 +681,8 @@
               }
             ]
           },
-          "unit": "kwatth"
+          "unit": "kwatth",
+          "min": 0
         },
         "overrides": []
       },
@@ -711,7 +714,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "clamp_min(scalar(smartmeter_daily_avg_kwh) - scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000), 0)",
+          "expr": "scalar(smartmeter_daily_avg_kwh) - scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000)",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -963,7 +966,8 @@
         }
       ],
       "title": "This Month's Cost (so far)",
-      "type": "stat"
+      "type": "stat",
+      "description": "Total household electricity cost this month from your Netz O\u00d6 smart meter. Includes ALL consumption (plugs + lights + oven + heating + everything)."
     },
     {
       "datasource": {
@@ -1027,7 +1031,8 @@
         }
       ],
       "title": "Yearly Cost (12 months)",
-      "type": "stat"
+      "type": "stat",
+      "description": "Total household electricity cost over the last 12 months from your Netz O\u00d6 smart meter. This is the real number from your meter \u2014 more accurate than the Smart Plug projections which only cover ~53% of consumption."
     },
     {
       "datasource": {
