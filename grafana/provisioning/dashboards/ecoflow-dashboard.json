@@ -2205,17 +2205,13 @@
           "placement": "right",
           "showLegend": true,
           "calcs": [
-            "percent",
-            "lastNotNull"
+            "lastNotNull",
+            "percent"
           ],
           "sortBy": "Last *",
           "sortDesc": true
         },
-        "displayLabels": [
-          "name",
-          "value",
-          "percent"
-        ]
+        "displayLabels": []
       }
     },
     {
