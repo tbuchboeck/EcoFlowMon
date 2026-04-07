@@ -77,21 +77,3 @@ jobs:
   #         railway up --service ecoflowmon
   #       env:
   #         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-
-  # Deploy to Fly.io
-  deploy-fly:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup flyctl
-        uses: superfly/flyctl-actions/setup-flyctl@master
-
-      - name: Deploy to Fly.io
-        run: flyctl deploy --remote-only --app ecoflowmon
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
