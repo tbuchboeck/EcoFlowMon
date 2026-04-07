@@ -830,6 +830,7 @@
         "y": 20
       },
       "id": 2,
+      "timeFrom": "24h",
       "options": {
         "legend": {
           "calcs": [
