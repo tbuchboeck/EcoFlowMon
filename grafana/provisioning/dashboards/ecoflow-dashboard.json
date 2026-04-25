@@ -2435,6 +2435,660 @@
           "sort": "desc"
         }
       }
+    },
+    {
+      "id": 102,
+      "type": "row",
+      "title": "Device Comparison",
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 80
+      },
+      "panels": []
+    },
+    {
+      "id": 103,
+      "type": "table",
+      "title": "Average Consumption per Device",
+      "description": "Compares average power draw per smart plug over the selected dashboard time range and projects daily / yearly energy plus cost. Uses avg_over_time on ecoflow_2_1_watts; offline devices are excluded.",
+      "gridPos": {
+        "h": 12,
+        "w": 14,
+        "x": 0,
+        "y": 81
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range])",
+          "legendFormat": "{{device_sn}}",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 / 1000",
+          "legendFormat": "{{device_sn}}",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 * 30.4375 / 1000",
+          "legendFormat": "{{device_sn}}",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 * 365 / 1000",
+          "legendFormat": "{{device_sn}}",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 * 365 / 1000 * $electricity_price",
+          "legendFormat": "{{device_sn}}",
+          "format": "table",
+          "instant": true,
+          "range": false,
+          "refId": "E"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "device_sn",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time 1": true,
+              "Time 2": true,
+              "Time 3": true,
+              "Time 4": true,
+              "Time 5": true,
+              "__name__ 1": true,
+              "__name__ 2": true,
+              "__name__ 3": true,
+              "__name__ 4": true,
+              "__name__ 5": true,
+              "device_name 2": true,
+              "device_name 3": true,
+              "device_name 4": true,
+              "device_name 5": true,
+              "instance 1": true,
+              "instance 2": true,
+              "instance 3": true,
+              "instance 4": true,
+              "instance 5": true,
+              "job 1": true,
+              "job 2": true,
+              "job 3": true,
+              "job 4": true,
+              "job 5": true,
+              "online 1": true,
+              "online 2": true,
+              "online 3": true,
+              "online 4": true,
+              "online 5": true
+            },
+            "indexByName": {
+              "device_sn": 0,
+              "device_name 1": 1,
+              "Value #A": 2,
+              "Value #B": 3,
+              "Value #C": 4,
+              "Value #D": 5,
+              "Value #E": 6
+            },
+            "renameByName": {
+              "device_sn": "Device SN",
+              "device_name 1": "Device",
+              "Value #A": "Ø Watt",
+              "Value #B": "kWh / Tag",
+              "Value #C": "kWh / Monat",
+              "Value #D": "kWh / Jahr",
+              "Value #E": "EUR / Jahr"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "kWh / Jahr",
+                "desc": true
+              }
+            ]
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Ø Watt"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "watt"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "gauge",
+                  "mode": "gradient"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWh / Tag"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kwatth"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWh / Monat"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kwatth"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "kWh / Jahr"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "kwatth"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "gauge",
+                  "mode": "gradient"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EUR / Jahr"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "currencyEUR"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892017.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G855542.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dryer"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892037.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Router & Charging Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892149.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dishwasher"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892165.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Microwave"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894218.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Washing Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894302.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TV Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894556.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Coffee Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894798.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Workstation"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G890652.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gaming Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G852886.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Deco Wozi"
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "footer": {
+          "show": true,
+          "reducer": [
+            "sum"
+          ],
+          "fields": [
+            "Value #B",
+            "Value #C",
+            "Value #D",
+            "Value #E"
+          ]
+        }
+      }
+    },
+    {
+      "id": 104,
+      "type": "barchart",
+      "title": "Yearly Energy Projection per Device",
+      "description": "Per-device yearly kWh projection based on the average power over the selected time range (avg_W * 24 * 365 / 1000). Useful for side-by-side comparison.",
+      "gridPos": {
+        "h": 12,
+        "w": 10,
+        "x": 14,
+        "y": 81
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 * 365 / 1000",
+          "legendFormat": "{{device_sn}}",
+          "instant": true,
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisLabel": "kWh / Jahr",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "kwatth",
+          "decimals": 0,
+          "min": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892017.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Fridge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G855542.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dryer"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892037.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Router & Charging Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892149.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Dishwasher"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G892165.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Microwave"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894218.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Washing Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894302.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "TV Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894556.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Coffee Machine"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G894798.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Workstation"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G890652.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Gaming Station"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": ".*HW52ZDH59G852886.*"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Deco Wozi"
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "orientation": "horizontal",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0,
+        "showValue": "auto",
+        "stacking": "none",
+        "groupWidth": 0.7,
+        "barWidth": 0.85,
+        "barRadius": 0,
+        "fullHighlight": false,
+        "tooltip": {
+          "mode": "single",
+          "sort": "desc"
+        },
+        "legend": {
+          "showLegend": false,
+          "displayMode": "list",
+          "placement": "bottom",
+          "calcs": []
+        }
+      }
     }
   ],
   "refresh": "30s",
