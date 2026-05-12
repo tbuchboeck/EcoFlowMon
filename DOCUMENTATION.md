@@ -180,7 +180,7 @@ curl http://35.237.68.210:3000/api/health
 | Microwave | HW52ZDH59G892165 | Smart Plug | Online |
 | Washing Machine | HW52ZDH59G894218 | Smart Plug | Online |
 | TV Station | HW52ZDH59G894302 | Smart Plug | Online |
-| Coffee Machine | HW52ZDH59G894556 | Smart Plug | Online |
+| Coffee Machine & Radio | HW52ZDH59G894556 | Smart Plug | Online (shared plug: coffee machine + radio) |
 | Workstation | HW52ZDH59G894798 | Smart Plug | Online |
 | Gaming Station | HW52ZDH59G890652 | Smart Plug | Online |
 | Deco Wozi | HW52ZDH59G852886 | Smart Plug | Online |
