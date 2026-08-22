@@ -69,8 +69,7 @@ Grafana (3 dashboards on :3000)
 | `fly.toml` | Fly.io deployment config (Frankfurt region) | Active |
 | `render.yaml` | Render.com deployment config | Archive |
 | `railway.json` | Railway deployment config | Archive |
-| `.github/workflows/deploy.yml` | CI/CD: Docker build + Fly.io deploy | Active |
-| `.github/workflows/gcp-deploy.yml` | CI/CD: GCP VM deploy via SSH | Active |
+| `.github/workflows/deploy.yml` | CI/CD: Docker build + push to ghcr.io | Active |
 | `terraform/gcp/main.tf` | GCP infrastructure (e2-micro VM, firewall) | Active |
 | `terraform/gcp/variables.tf` | Terraform variable definitions | Active |
 | `terraform/gcp/startup-script.sh` | VM startup: install Docker, clone repo, start services | Active |

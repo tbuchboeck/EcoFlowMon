@@ -167,20 +167,56 @@ Already done! Just:
 
 ## Current Setup
 
-You currently have:
-- ✅ **Render**: Running (costs $7/month)
-- ✅ **Fly.io**: Deployed (costs $2.70/month, needs 1GB RAM upgrade)
+Production runs on the **GCP Always Free e2-micro VM** — four Docker containers
+(`prometheus`, `grafana`, `ecoflow-collector`, `smartmeter-exporter`) started from
+`docker-compose.gcp.yml`. Render and Fly.io are no longer in use.
 
-**Recommended action:**
-1. Scale Fly.io: `fly scale vm shared-cpu-1x --memory 1024`
-2. Verify Fly.io works
-3. Delete Render service
-4. **Save $42/year!**
+### There is no automated deploy to the VM
 
-Or for maximum savings:
-1. Deploy to GCP (follow [terraform/gcp/README.md](terraform/gcp/README.md))
-2. Delete both Render and Fly.io
-3. **Save $84-110/year!** (pay only traffic overages if any)
+GitHub Actions (`.github/workflows/deploy.yml`) builds the image and pushes it to
+`ghcr.io` on every push to `main`. **Rolling the containers on the VM is manual.**
+
+A `gcp-deploy.yml` workflow used to claim otherwise. It never ran successfully: it
+referenced the repository secrets `GCP_SA_KEY` and `GCP_PROJECT_ID`, neither of
+which was ever created, so `google-github-actions/auth` aborted after ~10 s on
+every push to `main` and the VM was never contacted. The workflow was removed
+rather than left as a permanently-red check. Its commands are preserved below.
+
+### Manual deploy
+
+```bash
+gcloud compute ssh "$INSTANCE" --zone="$ZONE" --command="\
+  cd /opt/ecoflowmon && \
+  sudo git pull origin main && \
+  sudo docker compose -f docker-compose.gcp.yml pull && \
+  sudo docker compose -f docker-compose.gcp.yml up -d --force-recreate"
+```
+
+Verify afterwards:
+
+```bash
+gcloud compute ssh "$INSTANCE" --zone="$ZONE" --command="docker ps"
+gcloud compute instances describe "$INSTANCE" --zone="$ZONE" \
+  --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+```
+
+> **Confirm `$INSTANCE` and `$ZONE` once before relying on them.** The repository
+> (`terraform/gcp/variables.tf`, `terraform/gcp/README.md`, `DOCUMENTATION.md`)
+> says `ecoflowmon` / `us-east1-b`; the operator's notes say `ecoflowmon-d` /
+> `us-east1-d`. `gcloud compute instances list` settles it. The Terraform defaults
+> were deliberately left untouched — changing a zone default can plan a
+> destroy/recreate.
+
+> The old workflow used `docker-compose` (v1). Current images ship Compose v2, so
+> the commands above use `docker compose`. If the workflow is ever restored,
+> `gcloud compute ssh` from a runner also typically needs `--tunnel-through-iap`.
+
+### Restoring an automated deploy
+
+It needs a credential that does not exist yet — either a service-account key in
+`GCP_SA_KEY` plus `GCP_PROJECT_ID`, or (preferred, no long-lived key) Workload
+Identity Federation. Both are configured in the GCP console first; adding the
+workflow back without them reproduces the original failure exactly.
 
 ---
 
