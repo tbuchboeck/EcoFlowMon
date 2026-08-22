@@ -135,46 +135,44 @@ gcloud billing projects describe ecoflowmon-PROJECT_ID --format=json
 
 ## GitHub Actions CI/CD
 
-To enable automatic deployments on push to main:
+**There is no automated deploy to the VM.** `.github/workflows/deploy.yml` builds
+the image and pushes it to `ghcr.io`; rolling the containers on the VM is manual —
+see the *Manual deploy* runbook in [`DEPLOYMENT.md`](../../DEPLOYMENT.md).
 
-### 1. Create GCP Service Account
+A `gcp-deploy.yml` workflow previously claimed to do this. It never worked: it
+referenced the repository secrets `GCP_SA_KEY` and `GCP_PROJECT_ID`, neither of
+which was ever created, so `google-github-actions/auth` failed after ~10 s on every
+push to `main`. It was removed rather than left permanently red.
 
-```bash
-# Create service account
-gcloud iam service-accounts create github-actions \
-    --display-name="GitHub Actions Deployer"
+### If you want to wire it up
 
-# Grant necessary permissions
-gcloud projects add-iam-policy-binding PROJECT_ID \
-    --member="serviceAccount:github-actions@PROJECT_ID.iam.gserviceaccount.com" \
-    --role="roles/compute.instanceAdmin.v1"
+The blocker is the credential, not the workflow file. Two options:
 
-# Create and download key
-gcloud iam service-accounts keys create key.json \
-    --iam-account=github-actions@PROJECT_ID.iam.gserviceaccount.com
+- **Workload Identity Federation** (preferred) — no long-lived key to rotate or
+  leak. Set up a pool + provider in GCP and bind them to a deployer service
+  account, then authenticate with `workload_identity_provider` instead of
+  `credentials_json`.
+- **Service-account key** — simpler, but a long-lived secret:
 
-# Base64 encode the key (for GitHub Secret)
-cat key.json | base64 -w 0  # Linux
-cat key.json | base64        # macOS
-```
+  ```bash
+  gcloud iam service-accounts create github-actions \
+      --display-name="GitHub Actions Deployer"
 
-### 2. Add GitHub Secrets
+  gcloud projects add-iam-policy-binding PROJECT_ID \
+      --member="serviceAccount:github-actions@PROJECT_ID.iam.gserviceaccount.com" \
+      --role="roles/compute.instanceAdmin.v1"
 
-Go to: `https://github.com/tbuchboeck/EcoFlowMon/settings/secrets/actions`
+  gcloud iam service-accounts keys create key.json \
+      --iam-account=github-actions@PROJECT_ID.iam.gserviceaccount.com
+  ```
 
-Add these secrets:
-- `GCP_PROJECT_ID`: Your GCP project ID
-- `GCP_SA_KEY`: The base64-encoded service account key
-- `GCP_INSTANCE_NAME`: `ecoflowmon`
-- `GCP_ZONE`: `us-east1-b`
+  Then add `GCP_SA_KEY` (the JSON, not base64 — `google-github-actions/auth@v2`
+  accepts the raw key) and `GCP_PROJECT_ID` at
+  `https://github.com/tbuchboeck/EcoFlowMon/settings/secrets/actions`.
 
-### 3. Workflow is Ready!
-
-The GitHub Actions workflow in `.github/workflows/gcp-deploy.yml` will:
-- Build Docker image on every push to main
-- SSH into your GCP VM
-- Pull latest code
-- Restart services
+Either way, `gcloud compute ssh` from a runner usually also needs
+`--tunnel-through-iap`, and the instance name and zone must be confirmed against
+`gcloud compute instances list` first — see the note in `DEPLOYMENT.md`.
 
 ## Troubleshooting
 
