@@ -574,7 +574,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825\"}[7d])) * 24 / 1000",
           "legendFormat": "Smart Plugs (EcoFlow)",
           "refId": "B",
           "instant": true,
@@ -653,7 +653,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000) / scalar(smartmeter_daily_avg_kwh) * 100",
+          "expr": "scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825\"}[7d])) * 24 / 1000) / scalar(smartmeter_daily_avg_kwh) * 100",
           "legendFormat": "",
           "refId": "A",
           "instant": true,
@@ -720,7 +720,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "scalar(smartmeter_daily_avg_kwh) - scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[7d])) * 24 / 1000)",
+          "expr": "scalar(smartmeter_daily_avg_kwh) - scalar(sum(avg_over_time(ecoflow_2_1_watts{device_sn!~\"HW52ZDH59G893825\"}[7d])) * 24 / 1000)",
           "legendFormat": "",
           "refId": "A",
           "instant": true,

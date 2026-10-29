@@ -219,6 +219,51 @@ describe('MetricsCollector', () => {
         });
     });
 
+    describe('device list refresh', () => {
+        it('should re-read the device list once it is stale, picking up a plug that came online', async () => {
+            const mockGetDeviceList = jest.fn().mockResolvedValue([
+                { productName: 'Plug1', sn: 'SN001', online: 1 },
+            ]);
+            EcoFlowClient.mockImplementation(() => ({
+                getDeviceList: mockGetDeviceList,
+                getAllDeviceQuotas: jest.fn().mockResolvedValue({ watts: 100 }),
+            }));
+            const logSpy = jest.spyOn(console, 'log').mockImplementation();
+
+            collector = new MetricsCollector('ak', 'sk', 'https://api-e.ecoflow.com');
+            collector.devices = [{ productName: 'Plug1', sn: 'SN001', online: 0 }];
+            collector.devicesFetchedAt = Date.now() - 11 * 60 * 1000;
+
+            const metrics = await collector.collectMetrics();
+            const online = metrics.find((m) => m.name === 'ecoflow_device_online');
+
+            expect(mockGetDeviceList).toHaveBeenCalledTimes(1);
+            expect(online.value).toBe(1);
+            logSpy.mockRestore();
+        });
+
+        it('should not re-read a fresh list, and keep the old list on an empty reply', async () => {
+            const mockGetDeviceList = jest.fn().mockResolvedValue([]);
+            EcoFlowClient.mockImplementation(() => ({
+                getDeviceList: mockGetDeviceList,
+                getAllDeviceQuotas: jest.fn().mockResolvedValue({ watts: 100 }),
+            }));
+            const logSpy = jest.spyOn(console, 'log').mockImplementation();
+
+            collector = new MetricsCollector('ak', 'sk', 'https://api-e.ecoflow.com');
+            collector.devices = [{ productName: 'Plug1', sn: 'SN001', online: 1 }];
+            collector.devicesFetchedAt = Date.now();
+            await collector.collectMetrics();
+            expect(mockGetDeviceList).not.toHaveBeenCalled();
+
+            collector.devicesFetchedAt = 0;
+            await collector.collectMetrics();
+            expect(mockGetDeviceList).toHaveBeenCalledTimes(1);
+            expect(collector.devices).toHaveLength(1);
+            logSpy.mockRestore();
+        });
+    });
+
     describe('caching', () => {
         it('should return undefined for uncached device', () => {
             expect(collector.getCachedMetrics('UNKNOWN')).toBeUndefined();

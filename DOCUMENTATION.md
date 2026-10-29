@@ -184,7 +184,7 @@ curl http://35.237.68.210:3000/api/health
 | Gaming Station | HW52ZDH59G890652 | Smart Plug | Online |
 | Deco Wozi | HW52ZDH59G852886 | Smart Plug | Online |
 | Speaker 1 (disconnected) | HW52ZDH59G893825 | Smart Plug | Offline — removed from app, zeroed, excluded from dashboards |
-| Speaker 2 (disconnected) | HW52ZDH59G895552 | Smart Plug | Offline — removed from app, zeroed, excluded from dashboards |
+| Couch-Lampe (ex Speaker 2) | HW52ZDH59G895552 | Smart Plug | Online again since 28.10.2026, switches the lamp by the couch; included in dashboards |
 | PowerStream | HW51ZEH4SF6F4072 | PowerStream | Offline — solar/battery dashboard shows placeholder |
 | DELTA 2 Max | R351ZEB5HG7E0271 | Power Station | Offline — solar/battery dashboard shows placeholder |
 

@@ -211,7 +211,7 @@
             "properties": [
               {
                 "id": "displayName",
-                "value": "Speaker 2"
+                "value": "Couch-Lampe"
               }
             ]
           },
@@ -330,7 +330,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 24 / 1000",
           "legendFormat": "Smart Plugs Total",
           "refId": "A",
           "instant": true,
@@ -393,7 +393,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 24 / 1000 * $electricity_price",
           "legendFormat": "Estimated Daily Cost",
           "refId": "A",
           "instant": true,
@@ -593,7 +593,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "topk(10, ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"})",
+          "expr": "topk(10, ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"})",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": true,
@@ -854,7 +854,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}",
+          "expr": "ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}",
           "legendFormat": "{{device_sn}}",
           "refId": "A"
         },
@@ -863,7 +863,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"})",
+          "expr": "sum(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"})",
           "legendFormat": "Total (All Plugs)",
           "refId": "Z"
         }
@@ -950,7 +950,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 24 / 1000 * $electricity_price",
           "legendFormat": "Daily",
           "refId": "A",
           "instant": true,
@@ -961,7 +961,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 168 / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 168 / 1000 * $electricity_price",
           "legendFormat": "Weekly",
           "refId": "B",
           "instant": true,
@@ -972,7 +972,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 720 / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 720 / 1000 * $electricity_price",
           "legendFormat": "Monthly",
           "refId": "C",
           "instant": true,
@@ -983,7 +983,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 8760 / 1000 * $electricity_price",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 8760 / 1000 * $electricity_price",
           "legendFormat": "Yearly",
           "refId": "D",
           "instant": true,
@@ -1059,7 +1059,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 24 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 24 / 1000",
           "legendFormat": "Daily",
           "refId": "A",
           "instant": true,
@@ -1070,7 +1070,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 168 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 168 / 1000",
           "legendFormat": "Weekly",
           "refId": "B",
           "instant": true,
@@ -1081,7 +1081,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 720 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 720 / 1000",
           "legendFormat": "Monthly",
           "refId": "C",
           "instant": true,
@@ -1092,7 +1092,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])) * 8760 / 1000",
+          "expr": "sum(avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])) * 8760 / 1000",
           "legendFormat": "Yearly",
           "refId": "D",
           "instant": true,
@@ -1304,7 +1304,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "max_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])",
+          "expr": "max_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": true,
@@ -1315,7 +1315,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "max_over_time(sum(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"})[24h:1m])",
+          "expr": "max_over_time(sum(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"})[24h:1m])",
           "legendFormat": "Total (All Plugs)",
           "refId": "B",
           "instant": true,
@@ -1564,7 +1564,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_temp{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}",
+          "expr": "ecoflow_2_1_temp{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}",
           "legendFormat": "{{device_sn}}",
           "refId": "A"
         }
@@ -1775,7 +1775,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_parentWifiRssi{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}",
+          "expr": "ecoflow_2_1_parentWifiRssi{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": true,
@@ -1981,7 +1981,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "ecoflow_2_1_runTime{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"} / 60 / 24",
+          "expr": "ecoflow_2_1_runTime{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"} / 60 / 24",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": true,
@@ -2009,7 +2009,7 @@
       },
       "targets": [
         {
-          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[24h])",
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[24h])",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": true,
@@ -2232,7 +2232,7 @@
       },
       "targets": [
         {
-          "expr": "topk(5, avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[1h]))",
+          "expr": "topk(5, avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[1h]))",
           "legendFormat": "{{device_sn}}",
           "refId": "A",
           "instant": false,
@@ -2470,7 +2470,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range])",
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[$__range])",
           "legendFormat": "{{device_sn}}",
           "format": "table",
           "instant": true,
@@ -2482,7 +2482,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 / 1000",
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[$__range]) * 24 / 1000",
           "legendFormat": "{{device_sn}}",
           "format": "table",
           "instant": true,
@@ -2494,7 +2494,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 * 30.4375 / 1000",
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[$__range]) * 24 * 30.4375 / 1000",
           "legendFormat": "{{device_sn}}",
           "format": "table",
           "instant": true,
@@ -2506,7 +2506,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 * 365 / 1000",
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[$__range]) * 24 * 365 / 1000",
           "legendFormat": "{{device_sn}}",
           "format": "table",
           "instant": true,
@@ -2518,7 +2518,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 * 365 / 1000 * $electricity_price",
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[$__range]) * 24 * 365 / 1000 * $electricity_price",
           "legendFormat": "{{device_sn}}",
           "format": "table",
           "instant": true,
@@ -2888,7 +2888,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825|HW52ZDH59G895552\"}[$__range]) * 24 * 365 / 1000",
+          "expr": "avg_over_time(ecoflow_2_1_watts{device_sn=~\"$smartplug_sn\",device_sn!~\"HW52ZDH59G893825\"}[$__range]) * 24 * 365 / 1000",
           "legendFormat": "{{device_sn}}",
           "instant": true,
           "range": false,
