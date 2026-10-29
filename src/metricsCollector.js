@@ -1,9 +1,14 @@
 const EcoFlowClient = require('./ecoflowClient');
 
+// Re-read the device list this often, so the `online` flag and newly added or
+// re-joined devices don't stay frozen at the state of the last container start.
+const DEVICE_LIST_TTL_MS = 10 * 60 * 1000;
+
 class MetricsCollector {
     constructor(accessKey, secretKey, apiUrl) {
         this.client = new EcoFlowClient(accessKey, secretKey, apiUrl);
         this.devices = [];
+        this.devicesFetchedAt = 0;
         this.metricsCache = new Map();
     }
 
@@ -14,6 +19,7 @@ class MetricsCollector {
         try {
             console.log('Fetching device list...');
             this.devices = await this.client.getDeviceList();
+            this.devicesFetchedAt = Date.now();
             console.log(`Found ${this.devices.length} device(s):`);
 
             this.devices.forEach(device => {
@@ -58,7 +64,20 @@ class MetricsCollector {
     /**
      * Collect metrics from all devices
      */
+    async refreshDevicesIfStale() {
+        if (Date.now() - this.devicesFetchedAt < DEVICE_LIST_TTL_MS) return;
+        try {
+            const list = await this.client.getDeviceList();
+            // Keep the old list on an empty/odd reply rather than dropping all devices.
+            if (Array.isArray(list) && list.length > 0) this.devices = list;
+            this.devicesFetchedAt = Date.now();
+        } catch (error) {
+            console.error('Failed to refresh device list:', error.message);
+        }
+    }
+
     async collectMetrics() {
+        await this.refreshDevicesIfStale();
         const metrics = [];
 
         for (const device of this.devices) {
