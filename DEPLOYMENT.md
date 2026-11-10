@@ -188,8 +188,7 @@ rather than left as a permanently-red check. Its commands are preserved below.
 gcloud compute ssh "$INSTANCE" --zone="$ZONE" --command="\
   cd /opt/ecoflowmon && \
   sudo git pull origin main && \
-  sudo docker compose -f docker-compose.gcp.yml pull && \
-  sudo docker compose -f docker-compose.gcp.yml up -d --force-recreate"
+  sudo docker-compose -f docker-compose.gcp.yml up -d --build --no-deps <service>"
 ```
 
 Verify afterwards:
@@ -207,8 +206,11 @@ gcloud compute instances describe "$INSTANCE" --zone="$ZONE" \
 > were deliberately left untouched — changing a zone default can plan a
 > destroy/recreate.
 
-> The old workflow used `docker-compose` (v1). Current images ship Compose v2, so
-> the commands above use `docker compose`. If the workflow is ever restored,
+> The VM has **Compose v1 only** (`/usr/bin/docker-compose` 1.29.2, checked 2026-11-10);
+> `docker compose` fails there. Rebuild one service at a time with `--no-deps`
+> (`ecoflow-collector`, `smartmeter-exporter`, `shelly-exporter`). After changing
+> `prometheus.yml` run `sudo docker restart prometheus`: it is a single-file bind
+> mount, so the container keeps the old file after `git pull`. If the workflow is ever restored,
 > `gcloud compute ssh` from a runner also typically needs `--tunnel-through-iap`.
 
 ### Restoring an automated deploy

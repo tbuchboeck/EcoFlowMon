@@ -315,3 +315,4 @@ All panels have info tooltips explaining what the panel shows and how to read it
 | 2026-03-29 | Added month-over-month and year-over-year trend comparisons to Household Electricity dashboard |
 | 2026-03-29 | Stacked smart plug power chart with lighter fills and thick total line |
 | 2026-03-29 | Metric audit: 824 EcoFlow + 15 smartmeter = 839 metrics, all useful ones covered by dashboards |
+| 2026-11-10 | Added `shelly-exporter` (stdlib, Shelly Cloud `all_status` every 60 s, port 9092, `SHELLY_EMAIL`/`SHELLY_PW_SHA1` in `.env`) + Prometheus job `shelly`; 9 Shelly plugs exported under the EcoFlow metric names with `vendor="shelly"`, `device_sn` = MAC (PR #30). Prometheus must be restarted after `prometheus.yml` changes — the single-file bind mount keeps the old inode after `git checkout` |
