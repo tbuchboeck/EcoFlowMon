@@ -94,6 +94,22 @@ services:
         max-size: "10m"
         max-file: "3"
 
+  shelly-exporter:
+    build:
+      context: ./shelly
+    container_name: shelly-exporter
+    restart: unless-stopped
+    environment:
+      - SHELLY_EMAIL=${SHELLY_EMAIL}
+      - SHELLY_PW_SHA1=${SHELLY_PW_SHA1}
+    networks:
+      - monitoring
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
 networks:
   monitoring:
     driver: bridge
