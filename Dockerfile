@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
 # Install supervisord, nginx, and wget for Grafana/Prometheus
 RUN apk add --no-cache supervisor nginx wget
